@@ -1,10 +1,17 @@
-import { LitElement, html } from 'lit-element/lit-element';
-import { baseUrl } from '../app';
+import { LitElement, html } from 'lit-element';
+import { baseUrl, route } from '../app';
+import { $auth, setToken, isAuthenticated } from '../auth';
 
 class LoginPage extends LitElement {
 
   constructor() {
     super();
+
+    $auth.subscribe(data => {
+      if (isAuthenticated(data)) {
+        route("/admin")
+      }
+    });
   }
 
   login(e) {
@@ -26,7 +33,7 @@ class LoginPage extends LitElement {
       }
     })
     .then(res => res.text())
-    .then(response => console.log('Success:', response))
+    .then(response => setToken(response))
     .catch(error => console.error('Error:', error));
   }
 

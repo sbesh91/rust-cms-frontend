@@ -1,3 +1,8 @@
+import {
+  generatePageTransitionAnimation,
+  generateBaseLoadAnimation
+} from 'tools';
+
 export const routes = {
   '/': { label: 'Home', url: '/', selector: 'home-page', el: '' },
   '/login': { label: 'Login', url: '/login', selector: 'login-page', el: '' },
@@ -9,7 +14,7 @@ export const navigate = async (path) => {
   const page = path === '/' ? '/' : path.slice(1);
   
   if (isDynamic(page)) {
-    // todo load dynamic page (ajax to the server with )
+    // todo load dynamic page (ajax to the server)
   } else {
     await load(page);
   }
@@ -41,3 +46,42 @@ export const isDynamic = (route) => route.includes("articles");
 export const baseUrl = () => {
   return "/api/";
 }
+
+export const route = (href) => {
+  window.history.pushState({}, '', href);
+  viewChange(window.location);
+}
+
+export let currentLocation = "unset";
+
+export const viewChange = async (location) => {
+  if (currentLocation === "unset") {
+    await navigate(window.decodeURIComponent(location.pathname));
+    // todo write a function to check if route is dynamic
+    if (isDynamic(location.pathname)) {
+
+    } else {
+      // todo move this into a function
+      const firstView = document.querySelector(routes[location.pathname].selector);
+      generateBaseLoadAnimation(firstView, 'forwards');
+      firstView.classList.add('active');
+    }
+
+    return;
+  }
+
+  // the same is dynamic check needs to happen here
+
+  const oldView = document.querySelector(routes[currentLocation].selector);
+  generatePageTransitionAnimation(oldView, 'backwards');
+  oldView.classList.remove('active');
+
+  // toss up a spinner
+
+  await navigate(window.decodeURIComponent(location.pathname));
+  currentLocation = location.pathname;
+
+  const newView = document.querySelector(routes[location.pathname].selector);
+  generatePageTransitionAnimation(newView, 'forwards');
+  newView.classList.add('active')
+};

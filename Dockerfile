@@ -16,6 +16,4 @@ WORKDIR /usr/src/rust-cms-frontend
 
 COPY --from=node_builder /usr/src/rust-cms-frontend/dist .
 
-COPY nginx.conf /etc/nginx/nginx.conf
-
 EXPOSE 8080

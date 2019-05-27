@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element/lit-element';
+import { LitElement, html } from 'lit-element';
 
 class AdminPage extends LitElement {
 
