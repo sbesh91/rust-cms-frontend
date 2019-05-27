@@ -3,13 +3,21 @@ import {
   render
 } from 'lit-html';
 import {
-  installRouter
-} from 'pwa-helpers/router';
+  installRouter,
+  installOfflineWatcher,
+  installMediaQueryWatcher
+} from 'pwa-helpers';
 import {
   viewChange
 } from './app';
 
 installRouter((location) => viewChange(location));
+// todo cache everything for offline viewing
+// todo handle this in collaboration with service worker
+installOfflineWatcher((offline) => console.log(offline));
+installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
+  console.log(matches ? 'wide screen' : 'narrow sreen');
+});
 
 const body = () => html`
  <style>

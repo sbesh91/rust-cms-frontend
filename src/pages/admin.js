@@ -8,7 +8,7 @@ class AdminPage extends LitElement {
 
   render() {
     return html`
-    
+      https://codemirror.net/index.html
     `;
   }
 }
