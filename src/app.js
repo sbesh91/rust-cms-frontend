@@ -67,6 +67,7 @@ export const viewChange = async (location) => {
       firstView.classList.add('active');
     }
 
+    currentLocation = location.pathname;
     return;
   }
 
