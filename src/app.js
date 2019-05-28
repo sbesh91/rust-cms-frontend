@@ -82,6 +82,8 @@ export const viewChange = async (location) => {
   await navigate(window.decodeURIComponent(location.pathname));
   currentLocation = location.pathname;
 
+  // catch scnenario where new pathname is not-found
+
   const newView = document.querySelector(routes[location.pathname].selector);
   generatePageTransitionAnimation(newView, 'forwards');
   newView.classList.add('active')

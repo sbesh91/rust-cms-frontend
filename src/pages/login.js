@@ -7,11 +7,7 @@ class LoginPage extends LitElement {
   constructor() {
     super();
 
-    $auth.subscribe(data => {
-      if (isAuthenticated(data)) {
-        route("/admin")
-      }
-    });
+    $auth.subscribe(token => isAuthenticated(token) && route("/admin"));
   }
 
   login(e) {
