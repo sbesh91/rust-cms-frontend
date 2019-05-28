@@ -30,7 +30,7 @@ export const load = async (route) => {
       await import('./pages/about');
       break;
     case 'login':
-      await import('./pages/login');
+      await import('./pages/admin');
       break;
     case 'admin':
       await import('./pages/admin');

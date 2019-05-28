@@ -6,7 +6,7 @@ class LoginPage extends LitElement {
 
   constructor() {
     super();
-
+    console.log("login file");
     $auth.subscribe(token => isAuthenticated(token) && route("/admin"));
   }
 
