@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { baseUrl, route } from '../app';
 import { $auth, setToken, isAuthenticated } from '../auth';
+import { defaultStyles } from '../styles';
 
 class LoginPage extends LitElement {
 
@@ -33,9 +34,10 @@ class LoginPage extends LitElement {
     .catch(error => console.error('Error:', error));
   }
 
-  render() {
-    return html`
-      <style>
+  static get styles() {
+    return [
+      defaultStyles,
+      css`
         form {
           display: flex;
           flex-direction: column;
@@ -43,18 +45,18 @@ class LoginPage extends LitElement {
         }
 
         input, button {
-          padding: .25rem;
           margin: .5rem;
         }
-        
-        button {
-          display: inline-block;
-        }
-      </style>
+      `
+    ]
+  }
+
+  render() {
+    return html`
       <form @submit=${(e) => this.login(e)}>
         <input type="text" name="username" placeholder="username" value="sbesh91" />
         <input type="password" name="password" placeholder="password" value="test" />
-        <button type="submit">login</button>
+        <button type="submit">Login</button>
       </form>
     `;
   }
