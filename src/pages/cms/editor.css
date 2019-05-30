@@ -1,0 +1,122 @@
+.codeEditor {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 9rem);
+  width: 100%;
+}
+.codeEditor .lintError {
+  box-sizing: border-box;
+  background: #D86C74;
+  color: #FFF;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  padding: 0 2px 2px;
+  font-family: "source-code-pro", Menlo, Consolas, Monaco, "Andale Mono", "Courier New", monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  animation: intro 150ms ease forwards 1;
+  transform-origin: 0 0;
+}
+.codeEditor .lintError pre {
+  margin: -1px 0 -6px;
+}
+@keyframes intro {
+  from {
+    transform: scaleY(0.001);
+    opacity: 0;
+  }
+}
+.codeEditor :global .CodeMirror {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #282C34;
+  color: #ABB2BF;
+}
+.codeEditor :global .CodeMirror pre, .codeEditor :global .CodeMirror code, .codeEditor :global .CodeMirror .CodeMirror-linenumber {
+  font-family: "source-code-pro", Menlo, Consolas, Monaco, "Andale Mono", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.codeEditor :global .CodeMirror .CodeMirror-selected {
+  background: #3E4451;
+}
+.codeEditor :global .CodeMirror .CodeMirror-line::selection,
+.codeEditor :global .CodeMirror .CodeMirror-line > span::selection,
+.codeEditor :global .CodeMirror .CodeMirror-line > span > span::selection {
+  background: rgba(73, 72, 62, 0.99);
+}
+.codeEditor :global .CodeMirror .CodeMirror-gutters {
+  background: #282C34;
+  border-right: 1px solid #282C34;
+}
+.codeEditor :global .CodeMirror .CodeMirror-guttermarker {
+  color: white;
+}
+.codeEditor :global .CodeMirror .CodeMirror-guttermarker-subtle {
+  color: #d0d0d0;
+}
+.codeEditor :global .CodeMirror .CodeMirror-linenumber {
+  color: #4B5363;
+}
+.codeEditor :global .CodeMirror .CodeMirror-cursor {
+  border-left: 1px solid #528BFF;
+}
+.codeEditor :global .CodeMirror .cm-comment {
+  color: #667689;
+}
+.codeEditor :global .CodeMirror .cm-atom {
+  color: #64B6C3;
+}
+.codeEditor :global .CodeMirror .cm-number {
+  color: #D19A66;
+}
+.codeEditor :global .CodeMirror .cm-property {
+  color: #82A7BE;
+}
+.codeEditor :global .CodeMirror .cm-attribute {
+  color: #A483E0;
+}
+.codeEditor :global .CodeMirror .cm-keyword {
+  color: #D86C74;
+}
+.codeEditor :global .CodeMirror .cm-string,
+.codeEditor :global .CodeMirror .cm-string-2 {
+  color: #98C379;
+}
+.codeEditor :global .CodeMirror .cm-variable {
+  color: #ABB2BF;
+}
+.codeEditor :global .CodeMirror .cm-variable-2 {
+  color: #C678DD;
+}
+.codeEditor :global .CodeMirror .cm-variable-3 {
+  color: #64B6C3;
+}
+.codeEditor :global .CodeMirror .cm-def {
+  color: #6CAFF2;
+}
+.codeEditor :global .CodeMirror .cm-bracket {
+  color: #ABB2BF;
+}
+.codeEditor :global .CodeMirror .cm-tag {
+  color: #D86C74;
+}
+.codeEditor :global .CodeMirror .cm-header {
+  color: #ABB2BF;
+}
+.codeEditor :global .CodeMirror .cm-link {
+  color: #98C379;
+}
+.codeEditor :global .CodeMirror .cm-error {
+  background: #f92672;
+  color: red;
+}
+.codeEditor :global .CodeMirror .CodeMirror-activeline-background {
+  background: #2C323B;
+}
+.codeEditor :global .CodeMirror .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: #ABB2BF !important;
+}

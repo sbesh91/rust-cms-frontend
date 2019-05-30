@@ -1,13 +1,13 @@
 import { LitElement, html, css } from 'lit-element';
-import { baseUrl, route } from '../app';
-import { $auth, setToken, isAuthenticated } from '../auth';
-import { defaultStyles } from '../styles';
+import { route } from '../../app';
+import { $auth, setToken, isAuthenticated } from '../../auth';
+import { defaultStyles } from '../../styles';
+import { http } from '../../tools/http';
 
 class LoginPage extends LitElement {
 
   constructor() {
     super();
-    console.log("login file");
     $auth.subscribe(token => isAuthenticated(token) && route("/admin"));
   }
 
@@ -20,18 +20,13 @@ class LoginPage extends LitElement {
 	    "password": inputs["password"].value
     };
 
-    const url = `${baseUrl()}authenticate`
-
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data), 
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.text())
-    .then(response => setToken(response))
-    .catch(error => console.error('Error:', error));
+    http.fetch({
+      url: 'authenticate',
+      data: data,
+      method: 'POST'
+    }).then(res => res.text())
+      .then(response => setToken(response))
+      .catch(error => console.error('Error:', error));
   }
 
   static get styles() {
@@ -54,8 +49,8 @@ class LoginPage extends LitElement {
   render() {
     return html`
       <form @submit=${(e) => this.login(e)}>
-        <input type="text" name="username" placeholder="username" value="sbesh91" />
-        <input type="password" name="password" placeholder="password" value="test" />
+        <input type="text" name="username" placeholder="username" required />
+        <input type="password" name="password" placeholder="password" required />
         <button type="submit">Login</button>
       </form>
     `;

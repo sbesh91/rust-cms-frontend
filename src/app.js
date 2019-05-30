@@ -3,14 +3,14 @@ import {
   generateBaseLoadAnimation
 } from 'tools';
 
-export const routes = {
+const routes = {
   '/': { label: 'Home', url: '/', selector: 'home-page', el: '' },
   '/login': { label: 'Login', url: '/login', selector: 'login-page', el: '' },
   '/admin': { label: 'Admin', url: '/admin', selector: 'admin-page', el: '' },
   '/about': { label: 'About', url: '/about', selector: 'about-page', el: '' }
 };
 
-export const navigate = async (path) => {
+const navigate = async (path) => {
   const page = path === '/' ? '/' : path.slice(1);
   
   if (isDynamic(page)) {
@@ -21,7 +21,7 @@ export const navigate = async (path) => {
   
 };
 
-export const load = async (route) => {
+const load = async (route) => {
   switch (route) {
     case '/':
       await import('./pages/home');
@@ -30,10 +30,8 @@ export const load = async (route) => {
       await import('./pages/about');
       break;
     case 'login':
-      await import('./pages/admin');
-      break;
     case 'admin':
-      await import('./pages/admin');
+      await import('./pages/cms/index');
       break;
     default:
       await import('./pages/not-found');
@@ -41,20 +39,20 @@ export const load = async (route) => {
   }
 }
 
-export const isDynamic = (route) => route.includes("articles");
+const isDynamic = (route) => route.includes("articles");
 
-export const baseUrl = () => {
+const baseUrl = () => {
   return "/api/";
 }
 
-export const route = (href) => {
+const route = (href) => {
   window.history.pushState({}, '', href);
   viewChange(window.location);
 }
 
-export let currentLocation = "unset";
+let currentLocation = "unset";
 
-export const viewChange = async (location) => {
+const viewChange = async (location) => {
   if (currentLocation === "unset") {
     await navigate(window.decodeURIComponent(location.pathname));
     // todo write a function to check if route is dynamic
@@ -88,3 +86,14 @@ export const viewChange = async (location) => {
   generatePageTransitionAnimation(newView, 'forwards');
   newView.classList.add('active')
 };
+
+export {
+  viewChange,
+  currentLocation,
+  route,
+  baseUrl,
+  isDynamic,
+  load,
+  navigate,
+  routes
+}
