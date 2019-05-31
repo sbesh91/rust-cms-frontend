@@ -1,9 +1,15 @@
-const article = `
-  article
+import { html } from "lit-html";
+
+const article = html`
+  <div>
+    article
+  </div>
 `;
 
-const listing = `
-  listing
+const listing = html`
+  <div>
+    listing
+  </div>
 `;
 
 export {

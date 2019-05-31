@@ -1,3 +1,6 @@
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/addon/lint/lint.css'; 
+
 .codeEditor {
   position: relative;
   overflow: hidden;

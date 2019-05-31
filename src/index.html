@@ -31,10 +31,18 @@
       background: var(--dark-background);
     }
 
-    #body {
-      padding: 2rem;
+    div {
+      padding: 4% 5%;
       background: var(--light-background);
       height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    div::after {
+      content: '';
+      height: 2rem;
+      width: 100%;
+      display: block;
     }
   </style>
 </head>

@@ -6,17 +6,14 @@ import {
 import {
   defaultStyles
 } from '../../styles';
+import { http } from '../../tools/http';
 import { editorStyles } from "./editor-styles";
 import CodeMirror from 'codemirror';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/addon/lint/lint';
-import 'codemirror/addon/lint/javascript-lint';
+import 'codemirror/mode/htmlmixed/htmlmixed';
 import {
   article,
   listing
 } from './templates';
-import { JSHINT } from 'jshint'
-window.JSHINT = JSHINT;
 
 class EditorPage extends LitElement {
 
@@ -31,18 +28,19 @@ class EditorPage extends LitElement {
 
     this.editor = CodeMirror.fromTextArea(this.shadowRoot.querySelector('textarea'), {
       value: '',
-      mode: 'application/javascript',
+      mode: 'text/html',
       theme: 'one-dark',
       lineNumbers: true,
-      tabSize: 2,
-      showCursorWhenSelecting: true,
-      gutters: ['CodeMirror-lint-markers'],
-      lint: true
+      tabSize: 4,
+      showCursorWhenSelecting: true
     });
-    
-    setTimeout(() => {
-      this.editor.refresh();
-    }, 16);
+
+    http.fetch({
+      url: 'sections?section_type=&href=',
+      method: 'GET'
+    }).then(res => res.json())
+      .then(response => console.log(response))
+      .catch(error => console.error('Error:', error));
   }
 
   static get styles() {
@@ -62,8 +60,17 @@ class EditorPage extends LitElement {
 
         form {
           display: grid;
-
+          grid-template-columns: 1fr 1fr;
+          grid-gap: 1rem;
           max-width: 1024px;
+        }
+
+        .codeEditor {
+          grid-column: 1 / span 2;
+        }
+
+        button {
+          grid-column: 2;
         }
       `
     ]
@@ -71,17 +78,31 @@ class EditorPage extends LitElement {
 
   setSectionType(value) {
     if (value === "article") {
-      this.editor.setValue(article)
+      this.editor.setValue(article.getHTML())
     } 
     if (value === "listing") {
-      this.editor.setValue(listing)
+      this.editor.setValue(listing.getHTML())
     }
+    this.editor.refresh();
   }
 
   submit(e) {
+    e.preventDefault();
     const inputs = e.target.elements;
 
-    console.log(inputs);
+    const data = {
+      section_type: inputs['section_type'].value,
+      href: inputs['href'].value,
+      module: this.editor.getValue()
+    };
+
+    http.fetch({
+      url: 'sections',
+      data: data,
+      method: 'POST'
+    }).then(res => res.json())
+      .then(response => console.log(response))
+      .catch(error => console.error('Error:', error));
   }
 
   render() {

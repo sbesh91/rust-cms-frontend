@@ -7,6 +7,7 @@ WORKDIR /usr/src/rust-cms-frontend
 COPY src ./src
 COPY package.json .
 COPY .babelrc .
+COPY .postcssrc .
 
 RUN npm install
 RUN npm run build

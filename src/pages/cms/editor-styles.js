@@ -4,7 +4,7 @@ import {
 
 export const editorStyles = css`
   @import url(https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.47.0/codemirror.min.css);
-  @import url(https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.47.0/addon/lint/lint.min.css);
+
   .codeEditor {
     position: relative;
     overflow: hidden;
