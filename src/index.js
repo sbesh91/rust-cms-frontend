@@ -25,7 +25,6 @@ const body = () => html`
       position: relative;
     }
     main > * {
-      display: block;
       position: absolute;
       pointer-events: none;
       opacity: 0;

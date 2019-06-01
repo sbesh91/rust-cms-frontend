@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { route } from '../../app';
 import { $auth, setToken, isAuthenticated } from '../../auth';
-import { defaultStyles } from '../../styles';
+import { adminStyles } from '../../styles';
 import { http } from '../../tools/http';
 
 class LoginPage extends LitElement {
@@ -31,7 +31,7 @@ class LoginPage extends LitElement {
 
   static get styles() {
     return [
-      defaultStyles,
+      adminStyles,
       css`
         form {
           display: flex;

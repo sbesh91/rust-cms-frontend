@@ -4,12 +4,17 @@ import {
   css
 } from 'lit-element';
 import {
-  defaultStyles
+  adminStyles
 } from '../../styles';
-import { http } from '../../tools/http';
-import { editorStyles } from "./editor-styles";
+import {
+  http
+} from '../../tools/http';
+import {
+  editorStyles
+} from "./editor-styles";
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/htmlmixed/htmlmixed';
+import {ifDefined} from 'lit-html/directives/if-defined';
 import {
   article,
   listing
@@ -17,15 +22,24 @@ import {
 
 class EditorPage extends LitElement {
 
+  static get properties() {
+    return {
+      section: {
+        type: Object
+      }
+    };
+  }
+
   constructor() {
     super();
   }
 
-  firstUpdated(changedProperties) {
-    changedProperties.forEach((oldValue, propName) => {
-      console.log(`${propName} changed. oldValue: ${oldValue}`);
-    });
+  updated() {
+    this.editor.setValue(this.section.module);
+    this.editor.refresh();
+  }
 
+  firstUpdated() {
     this.editor = CodeMirror.fromTextArea(this.shadowRoot.querySelector('textarea'), {
       value: '',
       mode: 'text/html',
@@ -34,28 +48,31 @@ class EditorPage extends LitElement {
       tabSize: 4,
       showCursorWhenSelecting: true
     });
-
-    http.fetch({
-      url: 'sections?section_type=&href=',
-      method: 'GET'
-    }).then(res => res.json())
-      .then(response => console.log(response))
-      .catch(error => console.error('Error:', error));
   }
 
   static get styles() {
     return [
-      defaultStyles,
+      adminStyles,
       editorStyles,
       css `
         :host {
-          opacity: 0;
+          position: absolute;
           pointer-events: none;
+          opacity: 0;
+          top: 0;
+          left: 0;
+          right: 0;
+          max-height: 50vh;
+          overflow: hidden;
+          transition: 300ms linear opacity;
         }
 
         :host(.open) {
-          opacity: 1;
-          pointer-events: all;
+          position: relative !important;
+          max-height: none !important;
+          overflow: unset !important;
+          pointer-events: auto !important;
+          opacity: 1 !important;
         }
 
         form {
@@ -69,8 +86,10 @@ class EditorPage extends LitElement {
           grid-column: 1 / span 2;
         }
 
-        button {
+        .submit {
           grid-column: 2;
+          position: sticky;
+          bottom: -2rem;
         }
       `
     ]
@@ -79,11 +98,15 @@ class EditorPage extends LitElement {
   setSectionType(value) {
     if (value === "article") {
       this.editor.setValue(article.getHTML())
-    } 
+    }
     if (value === "listing") {
       this.editor.setValue(listing.getHTML())
     }
     this.editor.refresh();
+  }
+
+  close() {
+    document.dispatchEvent(new Event('close-section'))
   }
 
   submit(e) {
@@ -96,28 +119,47 @@ class EditorPage extends LitElement {
       module: this.editor.getValue()
     };
 
+    let method = 'POST';
+
+    if (this.section.id) {
+      method = 'PUT';
+      data.id = this.section.id;
+    }
+
     http.fetch({
-      url: 'sections',
-      data: data,
-      method: 'POST'
-    }).then(res => res.json())
-      .then(response => console.log(response))
+        url: 'sections',
+        data: data,
+        method: method
+      }).then(res => res.json())
+      .then(response => this.close())
       .catch(error => console.error('Error:', error));
   }
 
   render() {
+    if (!this.section) {
+      this.section = {
+        module: '',
+        href: '',
+        section_type: ''
+      }
+    }
+
     return html `
+      <header>
+        <button class="small back" @click=${(e) => this.close()}>Back</button>
+        Section
+      </header>
       <form @submit=${(e) => this.submit(e)}>
-        <select name="section_type" @change=${(e) => this.setSectionType(e.target.value)}>
-          <option>select a type...</option>
+        <select .value=${this.section.section_type} name="section_type" @change=${(e) => this.setSectionType(e.target.value)}>
+          <option value="">select a type...</option>
           <option value="article">Article</option>
           <option value="listing">Listing</option>
         </select>
-        <input type="text" name="href" placeholder="href" required />
+        <input value=${this.section.href} type="text" name="href" placeholder="href" required />
         <div class="codeEditor">
 					<textarea name="module"></textarea>
         </div>
-        <button type="submit">Submit</button>
+        <button class="submit" type="submit">Submit</button>
       </form>
     `;
   }
