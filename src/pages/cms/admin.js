@@ -14,7 +14,7 @@ import {
   route
 } from '../../app';
 import {
-  defaultStyles
+  defaultStyles, adminStyles
 } from '../../styles';
 import {
   http
@@ -29,7 +29,8 @@ class AdminPage extends LitElement {
   constructor() {
     super();
 
-    
+    this.filterHref = '';
+    this.filterSectionType = '';
     this.listPage = {
       open: true
     };
@@ -71,30 +72,61 @@ class AdminPage extends LitElement {
         section_type: ''
       };
 
-      this.performUpdate();
+      this.getSections()
     });
 
+    this.getSections();
+  }
+
+  getSections() {
     http.fetch({
-      url: 'sections?section_type=&href=',
+      url: `sections?section_type=${this.filterSectionType}&href=${this.filterHref}`,
       method: 'GET'
     }).then(res => res.json())
       .then(response => { 
-        this.list = response;
+        this.list = [...response];
+
         this.performUpdate();
       })
       .catch(error => console.error('Error:', error));
   }
 
+  changeSectionType(e) {
+    this.filterSectionType = e.target.value;
+    this.getSections();
+  }
+
+  changeHref(e) {
+    this.filterHref = e.target.value;
+    this.getSections();
+  }
+
   static get styles() {
     return [
-      defaultStyles,
-      css ``
+      adminStyles,
+      css `
+        select {
+          margin-left: auto;
+          margin-right: 1rem;
+        }
+      `
     ]
   }
 
   render() {
     return html `  
-      <list-page class=${classMap(this.listPage)} .list=${this.list}></list-page>
+      <list-page class=${classMap(this.listPage)} .list=${this.list}>
+        <header>
+          Filters
+          <select @change=${(e) => this.changeSectionType(e)}>
+            <option value="">All</option>
+            <option value="article">Article</option>
+            <option value="listing">Listing</option>
+          </select>
+          <input type="text" placeholder="Href" @change=${(e) => this.changeHref(e)} />
+        </header>
+      </list-page>
+      
       <editor-page class=${classMap(this.editorPage)} .section=${this.section}></editor-page>
     `;
   }

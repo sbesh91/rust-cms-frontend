@@ -64,15 +64,17 @@ class EditorPage extends LitElement {
           right: 0;
           max-height: 50vh;
           overflow: hidden;
-          transition: 300ms linear opacity;
+          visibility: hidden;
+          transition: 300ms var(--cubic) opacity;
         }
 
         :host(.open) {
-          position: relative !important;
-          max-height: none !important;
-          overflow: unset !important;
-          pointer-events: auto !important;
-          opacity: 1 !important;
+          position: relative;
+          max-height: none;
+          overflow: unset;
+          pointer-events: auto;
+          opacity: 1;
+          visibility: visible;
         }
 
         form {

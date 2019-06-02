@@ -32,13 +32,15 @@ const body = () => html`
       left: 0;
       max-height: 50vh;
       overflow: hidden;
+      visibility: hidden;
     }
     .active {
-      position: relative !important;
-      max-height: none !important;
-      overflow: unset !important;
-      pointer-events: auto !important;
-      opacity: 1 !important;
+      position: relative;
+      max-height: none;
+      overflow: unset;
+      pointer-events: auto;
+      opacity: 1;
+      visibility: visible;
     }
   </style>
   <header>

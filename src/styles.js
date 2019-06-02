@@ -48,7 +48,7 @@ const adminStyles = [
       padding: .5rem 1rem;
     }
 
-    input {
+    input, select {
       padding: .25rem;
       font-size: 1rem;
     }

@@ -37,17 +37,24 @@ class ListPage extends LitElement {
           opacity: 0;
           top: 0;
           left: 0;
+          right: 0;
           max-height: 50vh;
           overflow: hidden;
-          transition: 300ms linear opacity;
+          visibility: hidden;
+          transform: scale(.9, .9);
+          transition: 300ms var(--cubic);
+          transition-property: transform opacity;
+          transition-delay: 50ms;
         }
 
         :host(.open) {
-          position: relative !important;
-          max-height: none !important;
-          overflow: unset !important;
-          pointer-events: auto !important;
-          opacity: 1 !important;
+          position: relative;
+          max-height: none;
+          overflow: unset;
+          pointer-events: auto;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
         }
 
         header button {
@@ -102,6 +109,7 @@ class ListPage extends LitElement {
         Sections
         <button class="small" @click=${(e) => this.add(e)}>Add</button>
       </header> 
+      <slot></slot>
       <main>
         <section class="header">
           <div>Type</div>
