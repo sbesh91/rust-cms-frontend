@@ -7,50 +7,26 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Steven Beshensky</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: sans-serif;
-    }
-
-    html {
-      --dark-background: #272727;
-      --light-background: #ffffff;
-      --grey: rgba(0,0,0,.08);
-      --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
-      --box-shadow: 0 3px 5px 0 rgba(0,0,0,0.4);
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      font-size: 16px;
-      -webkit-clip-path: polygon(2% 1%, 98% 2%, 96% 97%, 0% 100%);
-      clip-path: polygon(2% 1%, 98% 2%, 96% 97%, 0% 100%);
-      background: var(--dark-background);
-    }
-
-    div {
-      padding: 4% 5%;
-      background: var(--light-background);
-      height: 100%;
-      overflow-y: scroll;
-      overflow-x: hidden;
-    }
-    div::after {
-      content: '';
-      height: 2rem;
-      width: 100%;
-      display: block;
-    }
-  </style>
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  <div id="body"></div>
+  <div id="body">
+    <header>
+      header section
+    </header>
+    <nav>
+      nav section
+    </nav>
+    <main>
+      <home-page></home-page>
+      <article-page></article-page>
+      <about-page></about-page>
+      <login-page></login-page>
+      <admin-page></admin-page>
+      <not-found></not-found>
+    </main>
+  </div>
   <script src="index.js"></script>
 </body>
 

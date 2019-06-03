@@ -46,7 +46,7 @@ class AdminPage extends LitElement {
     $section.subscribe(section => {
       this.listPage = { open: false };
       this.editorPage = { open: true };
-      this.section = section;
+      this.section = { ...section };
 
       this.performUpdate();
     });
@@ -126,7 +126,7 @@ class AdminPage extends LitElement {
           <input type="text" placeholder="Href" @change=${(e) => this.changeHref(e)} />
         </header>
       </list-page>
-      
+
       <editor-page class=${classMap(this.editorPage)} .section=${this.section}></editor-page>
     `;
   }

@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { adminStyles } from '../../styles';
 import { $section } from './observers';
-import {repeat} from 'lit-html/directives/repeat';
+import { repeat } from 'lit-html/directives/repeat';
 
 class ListPage extends LitElement {
 
