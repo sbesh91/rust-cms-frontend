@@ -1,6 +1,3 @@
-<svg>
-  <clipPath id="bodyClip">
-    <polygon points="2% 1%, 98% 2%, 96% 97%, 0% 100%">
-    </polygon>
-  </clipPath>
+<svg viewBox="0 0 288 288" xmlns="http://www.w3.org/2000/svg">
+  <polyline fill="white" points="2, 1 98, 2 96, 97 0, 100" />
 </svg>
