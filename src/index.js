@@ -5,7 +5,7 @@ import {
 } from 'pwa-helpers';
 import {
   viewChange
-} from './app';
+} from './tools/router';
 
 installRouter((location) => viewChange(location));
 // todo cache everything for offline viewing

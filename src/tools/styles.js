@@ -5,12 +5,27 @@ import {
 const defaultStyles = css`
   * { 
     box-sizing: border-box;  
-    font-family: sans-serif;
+    font-family: 'Exo', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
   }
 
   :host {
     display: block;
   }
+
+  h1,h2,h3 {
+    font-family: Trailmade, cursive;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    margin: 0;
+  }
+
+  h1 { font-size: 32px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 24px; } 
 `;
 
 
@@ -35,7 +50,6 @@ const adminStyles = [
       background: var(--dark-background);
       box-shadow: var(--box-shadow);
       color: var(--light-background);
-      font-family: sans-serif;
       font-size: 1rem;
       cursor: pointer;
       text-align: center;

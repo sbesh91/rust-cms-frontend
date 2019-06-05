@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-import { adminStyles } from '../../styles';
+import { adminStyles } from '../../tools/styles';
 import { $section } from './observers';
 import { repeat } from 'lit-html/directives/repeat';
 

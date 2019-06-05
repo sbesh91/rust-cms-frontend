@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Exo', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 html {
@@ -8,19 +11,36 @@ html {
   --light-background: #ffffff;
   --grey: rgba(0,0,0,.08);
   --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
-  --box-shadow: 0 3px 5px 0 rgba(0,0,0,0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --light-background: #272727;
+    --dark-background: #ffffff;
+  }
 }
 
 html, body {
   height: 100%;
 }
 
+h1,h2,h3 {
+  font-family: Trailmade, cursive;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+}
+
+h1 { font-size: 64px; }
+h2 { font-size: 56px; }
+h3 { font-size: 50px; } 
+
 body {
   margin: 0;
   font-size: 16px;
   -webkit-clip-path: polygon(2% 1%, 98% 2%, 96% 97%, 0% 100%);
   clip-path: polygon(2% 1%, 98% 2%, 96% 97%, 0% 100%);
-  background: var(--dark-background);
+  background-color: var(--dark-background);
 }
 
 div {
@@ -52,7 +72,8 @@ main > * {
   visibility: hidden;
 }
 
-main .active {
+
+main :global .active {
   position: relative !important;
   max-height: none !important;
   overflow: unset !important;

@@ -1,4 +1,4 @@
-import { getToken, $auth } from '../auth';
+import { getToken, $auth } from './auth';
 import { baseUrl } from '../app';
 
 const headers = {

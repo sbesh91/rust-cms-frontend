@@ -5,7 +5,7 @@ import {
 } from 'lit-element';
 import {
   adminStyles
-} from '../../styles';
+} from '../../tools/styles';
 import {
   http
 } from '../../tools/http';

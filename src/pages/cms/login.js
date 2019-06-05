@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
-import { route } from '../../app';
-import { $auth, setToken, isAuthenticated } from '../../auth';
-import { adminStyles } from '../../styles';
+import { route } from '../../tools/router';
+import { $auth, setToken, isAuthenticated } from '../../tools/auth';
+import { adminStyles } from '../../tools/styles';
 import { http } from '../../tools/http';
 
 class LoginPage extends LitElement {

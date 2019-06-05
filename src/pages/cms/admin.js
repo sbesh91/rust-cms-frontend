@@ -9,13 +9,13 @@ import {
 import {
   $auth,
   isAuthenticated
-} from '../../auth';
+} from '../../tools/auth';
 import {
   route
 } from '../../app';
 import {
-  defaultStyles, adminStyles
-} from '../../styles';
+  adminStyles
+} from '../../tools/styles';
 import {
   http
 } from '../../tools/http';
