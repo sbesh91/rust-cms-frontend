@@ -1,3 +1,5 @@
+import { route } from './tools/router';
+
 const routes = {
   '/': { label: 'Home', url: '/', selector: 'home-page', el: '' },
   '/login': { label: 'Login', url: '/login', selector: 'login-page', el: '' },
@@ -32,11 +34,9 @@ const getArticle = async (page) => {
 const load = async (route) => {
   switch (route) {
     case '/':
+    case 'about':
       await import('./pages/home/index');
       document.dispatchEvent(new Event('load-listings'));
-      break;
-    case 'about':
-      await import('./pages/about');
       break;
     case 'login':
     case 'admin':

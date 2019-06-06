@@ -9,23 +9,27 @@ const defaultStyles = css`
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+    color: var(--dark-background);
   }
 
   :host {
     display: block;
   }
 
-  h1,h2,h3 {
+  h1, h2, h3 {
+    margin: 0;
+  }
+
+  h1,h2,h3, h1 *, h2 *, h3 * {
     font-family: Trailmade, cursive;
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    margin: 0;
   }
 
-  h1 { font-size: 32px; }
-  h2 { font-size: 28px; }
-  h3 { font-size: 24px; } 
+  h1 { font-size: 64px; }
+  h2 { font-size: 48px; }
+  h3 { font-size: 40px; } 
 `;
 
 

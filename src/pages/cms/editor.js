@@ -14,7 +14,6 @@ import {
 } from "./editor-styles";
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/htmlmixed/htmlmixed';
-import {ifDefined} from 'lit-html/directives/if-defined';
 import {
   article,
   listing

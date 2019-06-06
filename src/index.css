@@ -1,15 +1,12 @@
 * {
   box-sizing: border-box;
-  font-family: 'Exo', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
 html {
   --dark-background: #272727;
   --light-background: #ffffff;
   --grey: rgba(0,0,0,.08);
+  --logo-translate: -1rem;
   --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
@@ -24,17 +21,6 @@ html, body {
   height: 100%;
 }
 
-h1,h2,h3 {
-  font-family: Trailmade, cursive;
-  font-style: normal;
-  font-weight: 400;
-  margin: 0;
-}
-
-h1 { font-size: 64px; }
-h2 { font-size: 56px; }
-h3 { font-size: 50px; } 
-
 body {
   margin: 0;
   font-size: 16px;
@@ -43,14 +29,23 @@ body {
   background-color: var(--dark-background);
 }
 
-div {
+section {
+  max-width: 1200px;
+  width: 100%;
+}
+
+
+:global #body {
   padding: 4% 5%;
-  background: var(--light-background);
+  background-color: var(--light-background);
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-div::after {
+:global #body::after {
   content: '';
   height: 2rem;
   width: 100%;
@@ -80,4 +75,25 @@ main :global .active {
   pointer-events: auto !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+:global .logo {
+  background-image: url('./assets/logo.svg');
+  background-repeat: no-repeat;
+  height: 100%;
+  transform-origin: center;
+  transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(-20deg) rotateZ(-35deg) skewX(-20deg) translateY(var(--logo-translate));
+}
+
+
+@media only screen and (max-width: 1200px) {
+  html {
+    --logo-translate: -0.5rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  html {
+    --logo-translate: 0;
+  }
 }

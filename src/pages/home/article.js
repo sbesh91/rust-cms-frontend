@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { defaultStyles } from '../../tools/styles';
 
 class ArticlePage extends LitElement {
   
@@ -13,9 +14,18 @@ class ArticlePage extends LitElement {
     });
   }
 
+  static get styles() {
+    return [
+      defaultStyles,
+      css`
+        
+      `
+    ]
+  }
+
   render() {
     if (!this.article) {
-      return;
+      return html``;
     }
 
     return html`

@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { repeat } from 'lit-html/directives/repeat';
+import { defaultStyles } from '../../tools/styles';
 
 class ListingPage extends LitElement {
 
@@ -27,6 +28,17 @@ class ListingPage extends LitElement {
         <a href=${this.getHref(item)}>Article</a>
       </div>
     `;
+  }
+
+  static get styles() {
+    return [
+      defaultStyles,
+      css`
+        :host {
+          display: block;
+        }
+      `
+    ]
   }
 
   // todo tombstoning

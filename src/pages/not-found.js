@@ -1,9 +1,19 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
+import { defaultStyles } from '../tools/styles';
 
 class NotFound extends LitElement {
 
   constructor() {
     super();
+  }
+
+  static get styles() {
+    return [
+      defaultStyles,
+      css`
+      
+      `
+    ]
   }
 
   render() {

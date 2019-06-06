@@ -24,7 +24,7 @@ const route = (href) => {
 
 let currentLocation = "unset";
 
-const manageDomViewChange = async (method = 'add', pathname = location.pathname) => {
+const manageDomViewChange = async (method = 'add', direction = 'forwards',  pathname = location.pathname) => {
   if (isDynamic(pathname)) {
     const dynamic = document.querySelector('article-page');
     // animate
@@ -33,7 +33,7 @@ const manageDomViewChange = async (method = 'add', pathname = location.pathname)
     
     try {
       const view = document.querySelector(routes[pathname].selector);
-      generateBaseLoadAnimation(view, 'forwards');
+      generateBaseLoadAnimation(view, direction);
 
       view.classList[method]('active');
 
@@ -56,7 +56,7 @@ const viewChange = async (location) => {
     return;
   }
 
-  manageDomViewChange('remove', currentLocation);
+  manageDomViewChange('remove', 'backwards', currentLocation);
   // toss up a spinner
 
   await navigate(window.decodeURIComponent(location.pathname));

@@ -1,5 +1,6 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { getListings } from '../../app';
+import { defaultStyles } from '../../tools/styles';
 
 class HomePage extends LitElement {
   
@@ -23,8 +24,18 @@ class HomePage extends LitElement {
     })
   }
 
+  static get styles() {
+    return [
+      defaultStyles,
+      css`
+        
+      `
+    ]
+  }
+
   render() {
     return html`
+      <about-page></about-page>
       <listing-page .listings=${this.listings}></listing-page>
     `;
   }
