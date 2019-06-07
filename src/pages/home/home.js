@@ -28,7 +28,13 @@ class HomePage extends LitElement {
     return [
       defaultStyles,
       css`
-        
+        about-page {
+
+        }
+
+        listing-page {
+          padding-top: 1rem;
+        }
       `
     ]
   }
