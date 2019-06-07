@@ -17,3 +17,7 @@ installOfflineWatcher((offline) => console.log(offline));
 installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
   console.log(matches ? 'wide screen' : 'narrow sreen');
 });
+
+document.querySelector('.logo').addEventListener('click', () => {
+  document.body.classList.toggle('invert');
+})

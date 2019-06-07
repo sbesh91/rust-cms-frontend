@@ -16,7 +16,7 @@ class ListingPage extends LitElement {
   constructor() {
     super();
 
-    this.line = "2, 1 98, 2 80, 97 0, 100";
+    this.line = ["2, 1", "98, 2", "80, 97", "0, 100"];
   }
 
   getHref(item) {
@@ -24,15 +24,17 @@ class ListingPage extends LitElement {
   }
 
   listItem(item) {
+    this.line = this.line.reverse();
+
     return html`
       <article>
         <section>
           ${unsafeHTML(item.module)}
           <a href=${this.getHref(item)}>Article</a>
         </section>
-
-        <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg">
-          <polyline #box points=${this.line} />
+        
+        <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+          <polyline points=${this.line.join(" ")} />
         </svg>
       </article>
     `;
@@ -65,17 +67,18 @@ class ListingPage extends LitElement {
             grid-template-columns: repeat(6, 1fr);
           }
 
-          main article:nth-of-type(2n) {
+          main article:nth-of-type(2n+1) {
             grid-column: 2 / span 6;
           }
 
-          main article:nth-of-type(2n+1) {
+          main article:nth-of-type(2n) {
             grid-column: 1 / span 5;
           }  
         }
 
         article {
           position: relative;
+          overflow: hidden;
         }
 
         section {

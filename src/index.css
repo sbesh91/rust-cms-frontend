@@ -2,31 +2,35 @@
   box-sizing: border-box;
 }
 
-html {
-  --dark-background: #272727;
-  --light-background: #ffffff;
-  --grey: rgba(0,0,0,.08);
-  --logo-translate: -1rem;
-  --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    --light-background: #272727;
-    --dark-background: #ffffff;
-  }
-}
-
 html, body {
   height: 100%;
 }
 
 body {
+  --dark-background: #272727;
+  --light-background: #ffffff;
+  --grey: rgba(0,0,0,.08);
+  --logo-translate: -1rem;
+  --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
+
   margin: 0;
   font-size: 16px;
   -webkit-clip-path: polygon(2% 1%, 98% 2%, 96% 97%, 0% 100%);
   clip-path: polygon(2% 1%, 98% 2%, 96% 97%, 0% 100%);
   background-color: var(--dark-background);
+  transition: 400ms background var(--cubic);
+}
+
+:global body.invert {
+  --light-background: #272727;
+  --dark-background: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --light-background: #272727;
+    --dark-background: #ffffff;
+  }
 }
 
 section {
@@ -44,6 +48,7 @@ section {
   align-items: center;
   overflow-y: scroll;
   overflow-x: hidden;
+  transition: 400ms background var(--cubic);
 }
 :global #body::after {
   content: '';
@@ -82,22 +87,28 @@ main :global .active {
 }
 
 :global .logo {
-  background-image: url('./assets/logo.svg');
-  background-repeat: no-repeat;
   height: 100%;
+  transition: 400ms transform var(--cubic);
   transform-origin: center;
   transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(-20deg) rotateZ(-35deg) skewX(-20deg) translateY(var(--logo-translate));
 }
 
+:global .invert .logo {
+  transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(20deg) rotateZ(-15deg) skewX(-20deg) translateY(var(--logo-translate));
+}
+
+:global .logo svg {
+  fill: var(--dark-background);
+}
 
 @media only screen and (max-width: 1200px) {
-  html {
+  body {
     --logo-translate: -0.5rem;
   }
 }
 
 @media only screen and (max-width: 800px) {
-  html {
+  body {
     --logo-translate: 0;
   }
 }

@@ -9,7 +9,14 @@ const defaultStyles = css`
     font-weight: 400;
     font-style: normal;
     font-display: swap;
+  }
+  
+  h1, h2, h3, p, article, a, section, header {
     color: var(--dark-background);
+  }
+
+  a {
+    cursor: pointer;
   }
 
   :host {
@@ -25,6 +32,7 @@ const defaultStyles = css`
     font-style: normal;
     font-weight: 400;
     font-display: swap;
+    color: var(--dark-background);
   }
 
   h1 { font-size: 64px; }
