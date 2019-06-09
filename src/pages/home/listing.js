@@ -16,7 +16,8 @@ class ListingPage extends LitElement {
   constructor() {
     super();
 
-    this.line = ["2, 1", "98, 2", "80, 97", "0, 100"];
+    // todo add more line variations and cycle through them;
+    this.line = ["2, 1", "98, 2", "100, 22", "0, 25"];
   }
 
   getHref(item) {
@@ -24,19 +25,18 @@ class ListingPage extends LitElement {
   }
 
   listItem(item) {
-    this.line = this.line.reverse();
+    // this.line = this.line.reverse();
 
     return html`
-      <article>
+      <a href=${this.getHref(item)}>
         <section>
           ${unsafeHTML(item.module)}
-          <a href=${this.getHref(item)}>Article</a>
         </section>
         
-        <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg">
           <polyline points=${this.line.join(" ")} />
         </svg>
-      </article>
+      </a>
     `;
   }
 
@@ -51,34 +51,34 @@ class ListingPage extends LitElement {
         main {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
-          grid-gap 2rem;
+          grid-gap: 1rem;
         }
 
-        main article:nth-of-type(2n+1) {
+        main a:nth-of-type(2n+1) {
           grid-column: 2 / span 3;
         }
 
-        main article:nth-of-type(2n) {
+        main a:nth-of-type(2n) {
           grid-column: 1 / span 2;
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 600pxs) {
           main {
             grid-template-columns: repeat(6, 1fr);
           }
 
-          main article:nth-of-type(2n+1) {
+          main a:nth-of-type(2n+1) {
             grid-column: 2 / span 6;
           }
 
-          main article:nth-of-type(2n) {
+          main a:nth-of-type(2n) {
             grid-column: 1 / span 5;
           }  
         }
 
-        article {
+        a {
           position: relative;
-          overflow: hidden;
+          cursor: pointer;
         }
 
         section {
@@ -89,6 +89,7 @@ class ListingPage extends LitElement {
           padding: 4% 5%;
           max-width: 100%;
           color: var(--light-background);
+          pointer-events: none;
         }
 
         section a {
@@ -96,13 +97,36 @@ class ListingPage extends LitElement {
         }
 
         svg {
-
-          /* max-height: 100%; */
           max-width: 100%;  
+          overflow: visible
         }
 
         svg polyline {
           fill: var(--dark-background);
+        }
+
+        svg polyline:hover {
+          animation: skew 1000ms infinite; 
+          animation-timing-function: linear;
+          transform-origin: center;
+        }
+
+        @keyframes skew {
+          0% {
+            transform: scale(1) skew(0);
+          }
+
+          33.3% {
+            transform: scale(0.99) skew(2deg);
+          }
+
+          66.6% {
+            transform: scale(1.01) skew(-2deg);
+          }
+
+          100% {
+            transform: scale(1) skew(0);
+          }
         }
       `
     ]

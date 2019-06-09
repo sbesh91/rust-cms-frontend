@@ -20,6 +20,18 @@ class AppNav extends LitElement {
           display: block;
           height: 6rem;
         }
+
+        @media only screen and (max-width: 600px) {
+          nav {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+          }
+
+          a {
+            height: 3rem;;
+          }
+        }
       `
     ]
   }

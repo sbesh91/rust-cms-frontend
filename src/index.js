@@ -19,5 +19,6 @@ installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
 });
 
 document.querySelector('.logo').addEventListener('click', () => {
+  // store this in localstorage
   document.body.classList.toggle('invert');
 })

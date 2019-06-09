@@ -21,6 +21,16 @@ class AppHeader extends LitElement {
         app-nav {
           padding-right: 5rem;
         }
+
+        @media only screen and (max-width: 600px) {
+          header {
+            height: auto;
+          }
+
+          app-nav {
+            padding-right: 2rem;
+          }
+        }
       `
     ]
   }
