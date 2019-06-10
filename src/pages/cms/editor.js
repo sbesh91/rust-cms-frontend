@@ -90,7 +90,7 @@ class EditorPage extends LitElement {
         .submit {
           grid-column: 2;
           position: sticky;
-          bottom: -2rem;
+          bottom: -1rem;
         }
       `
     ]

@@ -16,8 +16,17 @@ class ListingPage extends LitElement {
   constructor() {
     super();
 
-    // todo add more line variations and cycle through them;
-    this.line = ["2, 1", "98, 2", "100, 22", "0, 25"];
+    this.lines = [
+      ["2, 1", "98, 2", "100, 22", "0, 25"],
+      ["4, 1", "95, 0", "92, 22", "3, 25"],
+      ["0, 1", "98, 2", "100, 18", "0, 22"]
+    ]
+  }
+
+  getPoints() {
+    const random = Math.floor(Math.random() * this.lines.length);
+
+    return this.lines[random].join(" ");
   }
 
   getHref(item) {
@@ -25,8 +34,6 @@ class ListingPage extends LitElement {
   }
 
   listItem(item) {
-    // this.line = this.line.reverse();
-
     return html`
       <a href=${this.getHref(item)}>
         <section>
@@ -34,7 +41,7 @@ class ListingPage extends LitElement {
         </section>
         
         <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg">
-          <polyline points=${this.line.join(" ")} />
+          <polyline points=${this.getPoints()} />
         </svg>
       </a>
     `;

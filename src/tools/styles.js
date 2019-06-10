@@ -11,7 +11,7 @@ const defaultStyles = css`
     font-display: swap;
   }
   
-  h1, h2, h3, p, article, a, section, header {
+  h1, h2, h3, p, article, a, section, header, footer {
     color: var(--dark-background);
   }
 
@@ -27,7 +27,7 @@ const defaultStyles = css`
     margin: 0;
   }
 
-  h1,h2,h3, h1 *, h2 *, h3 * {
+  h1,h2,h3, footer, h1 *, h2 *, h3 *, footer * {
     font-family: Trailmade, cursive;
     font-style: normal;
     font-weight: 400;
