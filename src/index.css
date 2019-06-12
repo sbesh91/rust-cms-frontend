@@ -9,6 +9,7 @@ html, body {
 body {
   --dark-background: #272727;
   --light-background: #ffffff;
+  --grey-background: rgba(0, 0, 0, .7);
   --grey: rgba(0,0,0,.08);
   --logo-translate: -1rem;
   --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -55,6 +56,39 @@ section::after {
   overflow-y: scroll;
   overflow-x: hidden;
   transition: 400ms background var(--cubic);
+}
+
+:global #transition {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--grey-background);
+}
+
+:global #transition svg {
+  position: absolute;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  height: 200px;
+  transform-origin: center;
+  transform: rotate(-30deg) skew(-20deg);
+  overflow: visible;
+  opacity: 0;
+  stroke-width: .33rem;
+}
+
+:global #top path {
+  fill: var(--light-background);
+  stroke: var(--dark-background);
+}
+
+:global #bottom path {
+  fill: var(--dark-background);
+  stroke: var(--light-background);
 }
 
 app-footer {

@@ -24,39 +24,79 @@ const route = (href) => {
 
 let currentLocation = "unset";
 
-function animateViewChange(node, first, method, direction = 'forwards', axis = 'Y') {
-  const duration = 1000;
+async function animateViewChange(node, first, method, direction = 'forwards', axis = 'Y') {
+  const duration = direction === 'forwards' ? 1200 : 100;
   const animationTimingConfig = {
     fill: 'none',
     easing: "cubic-bezier(0.4, 0.0, 0.2, 1)",
     duration: duration
   };
+
+  const top = document.getElementById('top');
+  const bottom = document.getElementById('bottom');
+  const transition = document.getElementById('transition');
   
-  let frames;
+  let topFrames;
+  let bottomFrames;
+  let transitionFrames;
 
   if (direction === 'forwards') {
-    frames = [
-      {transform: `translateZ(-200px) rotate${axis}(180deg) scale(1)`, opacity: 0},
-      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.15},
-      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.20},
-      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1, offset: 0.65},
-      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1, offset: 0.70},
-      {transform: `translateZ(-200px) rotate${axis}(0) scale(1)`, opacity: 1}
+    topFrames = [
+      { transform: `rotate(-30deg) skew(-20deg) translate(-5rem, 0)`, opacity: 0 },
+      { transform: `rotate(-30deg) skew(-20deg)`, opacity: 1, offset: .1 },
+      { transform: `rotate(-30deg) skew(-20deg)`, opacity: 1, offset: .3 },
+      { transform: `rotate(0) skew(0)`, opacity: 1, offset: .4 },
+      { transform: `rotate(0) skew(0)`, opacity: 1, offset: .6 },
+      { transform: `rotate(0) skew(0) scale(1)`, opacity: 1, offset: .7 },
+      { transform: `rotate(0) skew(0) scale(1.75)`, opacity: .7, offset: .95 },
+      { transform: `rotate(0) skew(0) scale(2) translateY(-5rem)`, opacity: 0 },
+    ];
+
+    bottomFrames = [
+      { transform: `rotate(-30deg) skew(-20deg) translate(5rem, 0)`, opacity: 0 },
+      { transform: `rotate(-30deg) skew(-20deg)`, opacity: 1, offset: .1 },
+      { transform: `rotate(-30deg) skew(-20deg)`, opacity: 1, offset: .3 },
+      { transform: `rotate(0) skew(0)`, opacity: 1, offset: .4 },
+      { transform: `rotate(0) skew(0)`, opacity: 1, offset: .6 },
+      { transform: `rotate(0) skew(0) scale(1)`, opacity: 1, offset: .7 },
+      { transform: `rotate(0) skew(0) scale(1.75)`, opacity: .7, offset: .9 },
+      { transform: `rotate(0) skew(0) scale(2) translateY(5rem)`, opacity: 0 },
+    ];
+
+    transitionFrames = [
+      { opacity: 0 },
+      { opacity: 1, offset: .1 },
+      { opacity: 1, offset: .7 },
+      { opacity: 0 }
     ];
   } else {
-    frames = [
-      {transform: `translateZ(-200px) rotate${axis}(0) scale(1)`, opacity: 1},
-      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1,  offset: 0.15},
-      {transform: `translateZ(-100px) rotate${axis}(0) scale(1.1, 1.1)`, opacity: 1, offset: 0.20},
-      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.65},
-      {transform: `translateZ(-100px) rotate${axis}(180deg) scale(1.1, 1.1)`, opacity: 1, offset: 0.70},
-      {transform: `translateZ(-200px) rotate${axis}(180deg) scale(1)`, opacity: 0}
+    topFrames = [
+      
+    ];
+
+    bottomFrames = [
+
+    ];
+
+    transitionFrames = [
+
     ];
   }
 
-  const animation = node.animate(frames, animationTimingConfig);
+  const fadeTransition = transition.animate(transitionFrames, {
+    duration: duration,
+    fill: 'forwards'
+  });
+  const topAnimation = top.animate(topFrames, animationTimingConfig);
+  const bottomAnimation = bottom.animate(bottomFrames, animationTimingConfig);
+  
+  bottomAnimation.onfinish = onFinish(node, direction);
 
-  animation.onfinish = () => {
+  return Promise.all([fadeTransition.finished, topAnimation.finished, bottomAnimation.finished]);
+}
+
+function onFinish(node, direction) {
+  return () => {
     if (direction === 'forwards') {
       node.style.opacity = 1;
     } else {
@@ -69,13 +109,13 @@ const manageDomViewChange = async (first = false, method = 'add', direction = 'f
   if (isDynamic(pathname)) {
     const dynamic = document.querySelector('article-page');
 
+    dynamic.classList[method]('active');
+
     if (first) {
       generatePageTransitionAnimation(dynamic, direction);
     } else {
-      animateViewChange(dynamic, first, method, direction);
+      return animateViewChange(dynamic, first, method, direction);
     }
-
-    dynamic.classList[method]('active');
   } else {
     
     try {
@@ -104,7 +144,7 @@ const viewChange = async (location) => {
     return;
   }
 
-  manageDomViewChange(false, 'remove', 'backwards', currentLocation);
+  await manageDomViewChange(false, 'remove', 'backwards', currentLocation);
 
   // toss up a spinner
 
