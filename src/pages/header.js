@@ -22,6 +22,10 @@ class AppHeader extends LitElement {
           padding-right: 5rem;
         }
 
+        ::slotted(.logo) {
+          display: block !important;
+        }
+
         @media only screen and (max-width: 600px) {
           header {
             height: auto;

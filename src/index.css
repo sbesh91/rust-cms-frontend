@@ -8,7 +8,7 @@ html, body {
 
 body {
   --dark-background: #272727;
-  --light-background: #ffffff;
+  --light-background: #FAFAFA;
   --grey-background: rgba(0, 0, 0, .7);
   --grey: rgba(0,0,0,.08);
   --logo-translate: -1rem;
@@ -24,13 +24,13 @@ body {
 
 :global body.invert {
   --light-background: #272727;
-  --dark-background: #ffffff;
+  --dark-background: #FAFAFA;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
     --light-background: #272727;
-    --dark-background: #ffffff;
+    --dark-background: #FAFAFA;
   }
 }
 
@@ -38,6 +38,7 @@ section {
   max-width: 1200px;
   width: 100%;
   min-height: 100%;
+  margin: 0 auto;
   display: grid;
   grid-template-rows: auto auto 1fr;
 }
@@ -71,22 +72,21 @@ section::after {
 
 :global #transition svg {
   position: absolute;
-  left: calc(50% - 100px);
-  top: calc(50% - 100px);
-  height: 200px;
+  left: calc(50% - 150px);
+  top: calc(50% - 150px);
+  height: 300px;
   transform-origin: center;
-  transform: rotate(-30deg) skew(-20deg);
+  transform: rotate(-30deg) skew(-60deg);
   overflow: visible;
   opacity: 0;
-  stroke-width: .33rem;
 }
 
-:global #top path {
+:global #top rect {
   fill: var(--light-background);
   stroke: var(--dark-background);
 }
 
-:global #bottom path {
+:global #bottom rect {
   fill: var(--dark-background);
   stroke: var(--light-background);
 }
@@ -126,6 +126,7 @@ main :global .active {
 }
 
 :global .logo {
+  display: none;
   height: 100%;
   transition: 400ms transform var(--cubic);
   transform-origin: center;
