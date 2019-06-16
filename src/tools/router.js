@@ -25,7 +25,7 @@ const route = (href) => {
 let currentLocation = "unset";
 
 async function animateViewChange(node, first, method, direction = 'forwards', axis = 'Y') {
-  const duration = direction === 'forwards' ? 1200 : 100;
+  const duration = direction === 'forwards' ? 800 : 100;
   const curve = "cubic-bezier(0.4, 0.0, 0.2, 1)";
   const animationTimingConfig = {
     fill: 'none',
@@ -33,10 +33,9 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
     duration: duration
   };
 
-  const top = document.getElementById('top');
-  const bottom = document.getElementById('bottom');
-  const transition = document.getElementById('transition');
-  const rect = document.body.getBoundingClientRect();
+  const top = document.querySelector('#top svg');
+  const bottom = document.querySelector('#bottom svg');
+  const transition = document.querySelector('#transition');
 
   let topFrames;
   let bottomFrames;
@@ -44,32 +43,27 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
   let frames;
 
   if (direction === 'forwards') {
-    const rotate = -30;
-    const skew = -60;
-    const translateOut = 3;
-    const translateIn = 8;
-    const scale = Math.min(rect.width, 1400) / 300;
+    const rotate = -35;
+    const skew = -65;
+    const translateOut = 10;
+    const translateIn = 5;
 
     topFrames = [
-      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(-${translateIn}rem, 0)`, opacity: 0 },
-      { transform: `rotate(${rotate}deg) skew(${skew}deg) scale(1)`, opacity: .5, offset: .15 },
-      { transform: `rotate(${rotate}deg) skew(${skew}deg) scale(1)`, opacity: 1, offset: .35 },
-      { transform: `rotate(0) skew(0) scale(${scale/3})`, opacity: 1, offset: .5 },
-      { transform: `rotate(0) skew(0) scale(${scale/2})`, opacity: .5, offset: .6 },
-      { transform: `rotate(0) skew(0) scale(${scale})`, opacity: .2, offset: .75 },
-      { transform: `rotate(0) skew(0) scale(${scale})`, opacity: .1, offset: .95 },
-      { transform: `rotate(0) skew(0) scale(${scale}) translateY(-${translateOut}rem)`, opacity: 0 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(${translateIn}rem, 0)`, opacity: 0 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)`, opacity: .7, offset: .3 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)`, opacity: .5, offset: .6 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)`, opacity: .2, offset: .75 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(${translateOut}rem, 0)`, opacity: .1, offset: .95 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(${translateOut}rem, 0)`, opacity: 0 },
     ];
 
     bottomFrames = [
-      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(${translateIn}rem, 0)`, opacity: 0 },
-      { transform: `rotate(${rotate}deg) skew(${skew}deg) scale(1)`, opacity: .5, offset: .15 },
-      { transform: `rotate(${rotate}deg) skew(${skew}deg) scale(1)`, opacity: 1, offset: .35 },
-      { transform: `rotate(0) skew(0) scale(${scale/3})`, opacity: 1, offset: .5 },
-      { transform: `rotate(0) skew(0) scale(${scale/2})`, opacity: .5, offset: .6 },
-      { transform: `rotate(0) skew(0) scale(${scale})`, opacity: .2, offset: .75 },
-      { transform: `rotate(0) skew(0) scale(${scale})`, opacity: .1, offset: .95 },
-      { transform: `rotate(0) skew(0) scale(${scale}) translateY(${translateOut}rem)`, opacity: 0 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(-${translateIn}rem, 0)`, opacity: 0 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)`, opacity: .7, offset: .3 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)`, opacity: .5, offset: .6 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)`, opacity: .2, offset: .75 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(-${translateOut}rem, 0)`, opacity: .1, offset: .95 },
+      { transform: `rotate(${rotate}deg) skew(${skew}deg)  translate(-${translateOut}rem, 0)`, opacity: 0 },
     ];
 
     transitionFrames = [
@@ -109,7 +103,7 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
   const topAnimation = top.animate(topFrames, animationTimingConfig);
   const bottomAnimation = bottom.animate(bottomFrames, animationTimingConfig);
   const animation = node.animate(frames, {
-    duration: 1800,
+    duration: duration + 600,
     easing: curve,
     fill: 'forwards'
   });

@@ -72,23 +72,23 @@ section::after {
 
 :global #transition svg {
   position: absolute;
-  left: calc(50% - 150px);
-  top: calc(50% - 150px);
-  height: 300px;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  height: 200px;
   transform-origin: center;
-  transform: rotate(-30deg) skew(-60deg);
+  transform: rotate(-35deg) skew(-65deg);
   overflow: visible;
   opacity: 0;
 }
 
-:global #top rect {
+:global #top rect, :global #top path {
   fill: var(--light-background);
-  stroke: var(--dark-background);
+  stroke: var(--grey);
 }
 
-:global #bottom rect {
+:global #bottom rect, :global #bottom path {
   fill: var(--dark-background);
-  stroke: var(--light-background);
+  stroke: var(--grey);
 }
 
 app-footer {

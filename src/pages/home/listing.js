@@ -23,17 +23,15 @@ class ListingPage extends LitElement {
     ]
   }
 
-  getPoints() {
-    const random = Math.floor(Math.random() * this.lines.length);
-
-    return this.lines[random].join(" ");
+  getPoints(index) {
+    return this.lines[index % this.lines.length].join(" ");
   }
 
   getHref(item) {
     return item.href.replace('listings', 'articles');
   }
 
-  listItem(item) {
+  listItem(item, index) {
     return html`
       <a href=${this.getHref(item)}>
         <section>
@@ -41,7 +39,7 @@ class ListingPage extends LitElement {
         </section>
         
         <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg">
-          <polyline points=${this.getPoints()} />
+          <polyline points=${this.getPoints(index)} />
         </svg>
       </a>
     `;
@@ -107,34 +105,6 @@ class ListingPage extends LitElement {
           max-width: 100%;  
           overflow: visible
         }
-
-        svg polyline {
-          fill: var(--dark-background);
-        }
-
-        svg polyline:hover {
-          animation: skew 1000ms infinite; 
-          animation-timing-function: linear;
-          transform-origin: center;
-        }
-
-        @keyframes skew {
-          0% {
-            transform: scale(1) skew(0);
-          }
-
-          33.3% {
-            transform: scale(0.99) skew(2deg);
-          }
-
-          66.6% {
-            transform: scale(1.01) skew(-2deg);
-          }
-
-          100% {
-            transform: scale(1) skew(0);
-          }
-        }
       `
     ]
   }
@@ -147,7 +117,7 @@ class ListingPage extends LitElement {
 
     return html`
       <main>
-        ${repeat(this.listings, (i) => i.id, (i, index) => this.listItem(i))}
+        ${repeat(this.listings, (i) => i.id, (i, index) => this.listItem(i, index))}
       </main>
     `;
   }

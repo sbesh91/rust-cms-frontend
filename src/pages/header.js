@@ -32,7 +32,7 @@ class AppHeader extends LitElement {
           }
 
           app-nav {
-            padding-right: 2rem;
+            padding-right: 1rem;
           }
         }
       `

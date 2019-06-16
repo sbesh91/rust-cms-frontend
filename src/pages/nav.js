@@ -13,23 +13,42 @@ class AppNav extends LitElement {
       css`
         nav {
           display: grid;
-          grid-template-columns: minmax(150px, 250px) minmax(150px, 250px);
+          grid-template-columns: minmax(100px, 200px) minmax(100px, 200px);
+          grid-gap: 1rem;
         }
 
         a {
           display: block;
-          height: 6rem;
+          position: relative;
+        }
+
+        span {
+          font-family: Trailmade, cursive;
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          font-size: 2rem;
+          display: inline-block;
+          color: var(--light-background);
+          pointer-events: none;
+          position: absolute;
+          top: 0;
+          left: calc(50% - 20px);
         }
 
         @media only screen and (max-width: 600px) {
           nav {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(125px, 175px);
             grid-template-rows: 1fr 1fr;
           }
 
           a {
-            height: 3rem;;
+            height: 3rem;
+          }
+
+          svg {
+            min-height: 40px;
           }
         }
       `
@@ -39,8 +58,18 @@ class AppNav extends LitElement {
   render() {
     return html`
       <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
+        <a href="/">
+          <span>Home</span>
+          <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6,1 98,2 90,22 2,25" />
+          </svg>
+        </a>
+        <a href="/about">
+          <span>About</span>
+          <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="0,1 90,2 100,18 4,22" />
+          </svg>
+        </a>
       </nav>
     `;
   }

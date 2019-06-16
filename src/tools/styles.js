@@ -38,6 +38,34 @@ const defaultStyles = css`
   h1 { font-size: 64px; }
   h2 { font-size: 48px; }
   h3 { font-size: 40px; } 
+
+  svg polyline {
+    fill: var(--dark-background);
+  }
+
+  svg polyline:hover {
+    animation: skew 1000ms infinite; 
+    animation-timing-function: linear;
+    transform-origin: center;
+  }
+
+  @keyframes skew {
+    0% {
+      transform: scale(1) skew(0);
+    }
+
+    33.3% {
+      transform: scale(0.99) skew(2deg);
+    }
+
+    66.6% {
+      transform: scale(1.01) skew(-2deg);
+    }
+
+    100% {
+      transform: scale(1) skew(0);
+    }
+  }
 `;
 
 
