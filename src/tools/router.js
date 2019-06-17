@@ -73,10 +73,12 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
       { opacity: 0 }
     ];
 
+    const slide = 1;
+
     frames = [
-      { opacity: 0 },
-      { opacity: 0, offset: .9 },
-      { opacity: 1 }
+      { transform: `translateY(${slide}rem)`, opacity: 0 },
+      { transform: `translateY(${slide}rem)`, opacity: 0, offset: .9 },
+      { transform: `none`, opacity: 1 }
     ]
   } else {
     topFrames = [
@@ -103,7 +105,7 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
   const topAnimation = top.animate(topFrames, animationTimingConfig);
   const bottomAnimation = bottom.animate(bottomFrames, animationTimingConfig);
   const animation = node.animate(frames, {
-    duration: duration + 600,
+    duration: duration + 400,
     easing: curve,
     fill: 'forwards'
   });

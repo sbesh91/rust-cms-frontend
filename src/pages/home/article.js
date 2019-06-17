@@ -18,7 +18,13 @@ class ArticlePage extends LitElement {
     return [
       defaultStyles,
       css`
-        
+        :host {
+          transform-origin: center;
+        }
+
+        p, span, a, section, header, footer, div {
+          color: var(--dark-background);
+        }
       `
     ]
   }

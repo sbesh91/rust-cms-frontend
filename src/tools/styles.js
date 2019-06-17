@@ -23,11 +23,11 @@ const defaultStyles = css`
     display: block;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, p {
     margin: 0;
   }
 
-  h1,h2,h3, footer, h1 *, h2 *, h3 *, footer * {
+  .cursive, h1, h2, h3, footer, h1 *, h2 *, h3 *, footer * {
     font-family: Trailmade, cursive;
     font-style: normal;
     font-weight: 400;
@@ -38,6 +38,10 @@ const defaultStyles = css`
   h1 { font-size: 64px; }
   h2 { font-size: 48px; }
   h3 { font-size: 40px; } 
+
+  .spacer {
+    padding: .5rem 0;
+  }
 
   svg polyline {
     fill: var(--dark-background);

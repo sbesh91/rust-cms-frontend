@@ -1,4 +1,5 @@
 import './home';
-import './listing';
+import './listings';
 import './article';
 import './about';
+import './listing';

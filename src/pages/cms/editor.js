@@ -80,7 +80,6 @@ class EditorPage extends LitElement {
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-gap: 1rem;
-          max-width: 1024px;
         }
 
         .codeEditor {
@@ -91,6 +90,7 @@ class EditorPage extends LitElement {
           grid-column: 2;
           position: sticky;
           bottom: -1rem;
+          z-index: 2;
         }
       `
     ]
