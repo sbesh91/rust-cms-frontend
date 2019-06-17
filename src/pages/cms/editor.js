@@ -31,6 +31,14 @@ class EditorPage extends LitElement {
 
   constructor() {
     super();
+
+    document.addEventListener("keydown", event => {
+      if(event.ctrlKey && event.key === 's' && this.section.id) {
+        event.preventDefault();
+        const button = this.shadowRoot.querySelector('form button');
+        button.click();
+      }
+    });
   }
 
   updated() {

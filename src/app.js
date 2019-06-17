@@ -8,8 +8,6 @@ const routes = {
   '/not-found': { label: 'Not Found', url: '/not-found', selector: 'not-found', el: '' }
 };
 
-
-
 const getListings = async () => {
   const request = await fetch(`${baseUrl()}sections?section_type=listing&href=`);
   const response = await request.json();  
@@ -34,9 +32,10 @@ const getArticle = async (page) => {
 const load = async (route) => {
   switch (route) {
     case '/':
-    case 'about':
       await import('./pages/home/index');
       document.dispatchEvent(new Event('load-listings'));
+    case 'about':
+      await import('./pages/home/index');
       break;
     case 'login':
     case 'admin':

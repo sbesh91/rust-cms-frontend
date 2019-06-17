@@ -10,7 +10,7 @@ const navigate = async (path) => {
   
   if (isDynamic(page)) {
     await import('../pages/home/index')
-    await getArticle(page);
+    getArticle(page);
   } else {
     await load(page);
   }
@@ -25,7 +25,7 @@ const route = (href) => {
 let currentLocation = "unset";
 
 async function animateViewChange(node, first, method, direction = 'forwards', axis = 'Y') {
-  const duration = direction === 'forwards' ? 800 : 100;
+  const duration = direction === 'forwards' ? 800 : 0;
   const curve = "cubic-bezier(0.4, 0.0, 0.2, 1)";
   const animationTimingConfig = {
     fill: 'none',
@@ -42,11 +42,14 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
   let transitionFrames;
   let frames;
 
+  const rotate = -35;
+  const skew = -65;
+  const translateOut = 10;
+  const translateIn = 5;
+  const slide = 1;
+
   if (direction === 'forwards') {
-    const rotate = -35;
-    const skew = -65;
-    const translateOut = 10;
-    const translateIn = 5;
+
 
     topFrames = [
       { transform: `rotate(${rotate}deg) skew(${skew}deg) translate(${translateIn}rem, 0)`, opacity: 0 },
@@ -73,8 +76,6 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
       { opacity: 0 }
     ];
 
-    const slide = 1;
-
     frames = [
       { transform: `translateY(${slide}rem)`, opacity: 0 },
       { transform: `translateY(${slide}rem)`, opacity: 0, offset: .9 },
@@ -94,7 +95,8 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
     ];
 
     frames = [
-      
+      { transform: `none`, opacity: 1 },
+      { transform: `translateY(${slide}rem)`, opacity: 0 }
     ];
   }
 
@@ -105,14 +107,14 @@ async function animateViewChange(node, first, method, direction = 'forwards', ax
   const topAnimation = top.animate(topFrames, animationTimingConfig);
   const bottomAnimation = bottom.animate(bottomFrames, animationTimingConfig);
   const animation = node.animate(frames, {
-    duration: duration + 400,
+    duration: duration + 300,
     easing: curve,
     fill: 'forwards'
   });
   
   animation.onfinish = onFinish(node, direction);
 
-  return Promise.all([fadeTransition.finished, topAnimation.finished, bottomAnimation.finished]);
+  return Promise.all([fadeTransition.finished, topAnimation.finished, bottomAnimation.finished, animation.finished]);
 }
 
 function onFinish(node, direction) {
@@ -129,12 +131,17 @@ const manageDomViewChange = async (first = false, method = 'add', direction = 'f
   if (isDynamic(pathname)) {
     const dynamic = document.querySelector('article-page');
 
-    dynamic.classList[method]('active');
+    if (direction === 'forwards') dynamic.classList[method]('active');
     
     if (first) {
       generatePageTransitionAnimation(dynamic, direction);
     } else {
-      return animateViewChange(dynamic, first, method, direction);
+      await animateViewChange(dynamic, first, method, direction);
+    }
+
+    if (direction === 'backwards') { 
+      dynamic.classList[method]('active'); 
+      document.dispatchEvent(new CustomEvent('unload-article'));
     }
     
   } else {
@@ -159,7 +166,7 @@ const viewChange = async (location) => {
   if (currentLocation === "unset") {
     await navigate(window.decodeURIComponent(location.pathname));
     
-    manageDomViewChange(true);
+    await manageDomViewChange(true);
 
     currentLocation = location.pathname;
     return;
@@ -172,7 +179,7 @@ const viewChange = async (location) => {
   await navigate(window.decodeURIComponent(location.pathname));
   currentLocation = location.pathname;
   
-  manageDomViewChange()
+  await manageDomViewChange()
 };
 
 export {

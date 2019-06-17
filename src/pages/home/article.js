@@ -9,9 +9,15 @@ class ArticlePage extends LitElement {
     
     document.addEventListener('load-article', (e) => {
       this.article = { ...e.detail };
-
+      
       this.performUpdate();
     });
+
+    document.addEventListener('unload-article', () => {
+      this.article = { module: "" };
+      
+      this.performUpdate();
+    })
   }
 
   static get styles() {

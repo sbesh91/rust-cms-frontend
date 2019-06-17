@@ -14,7 +14,7 @@ class ListingPage extends LitElement {
   
   constructor() {
     super();
-
+    // todo make taller svg on mobile
     this.lines = [
       ["2, 1", "98, 2", "100, 22", "0, 25"],
       ["4, 1", "95, 0", "92, 22", "3, 25"],

@@ -74,7 +74,8 @@ class AboutPage extends LitElement {
       </p>
 
       <p>
-        It's been a wild ride through different technologies and different ideologies
+        It's been a wild ride through different technologies and different ideologies.  
+        I currently work with docker, javascript, and loads of other fun things.
       </p>
 
       <div class="spacer"></div>
@@ -82,7 +83,7 @@ class AboutPage extends LitElement {
       <p>
         I work with a health care IT company (ImageMoverMD) and we do some pretty cool things.
         We specialize in automating and solving obscure imaging problems in medicine.
-        Our software can handle workflows ranging from smart phone image capture to CD uploading (and a few other things I can't tell you about 😉)
+        Our software can handle workflows ranging from smart phone image capture to CD uploading (and a few other things I can't tell you about yet 😉)
       </p>      
 
       <div class="spacer"></div>
