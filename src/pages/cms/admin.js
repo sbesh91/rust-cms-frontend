@@ -10,9 +10,7 @@ import {
   $auth,
   isAuthenticated
 } from '../../tools/auth';
-import {
-  route
-} from '../../app';
+import { route } from '../../tools/router';
 import {
   adminStyles
 } from '../../tools/styles';
