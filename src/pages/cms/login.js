@@ -33,6 +33,10 @@ class LoginPage extends LitElement {
     return [
       adminStyles,
       css`
+        :host(.active) {
+          z-index: 2;
+        }
+
         form {
           display: flex;
           flex-direction: column;

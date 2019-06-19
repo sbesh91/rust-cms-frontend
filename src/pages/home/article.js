@@ -26,6 +26,7 @@ class ArticlePage extends LitElement {
       css`
         :host {
           transform-origin: center;
+          max-width: 800px;
         }
 
         p, span, a, section, header, footer, div {

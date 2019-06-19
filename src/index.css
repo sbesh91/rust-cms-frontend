@@ -32,6 +32,11 @@ body {
     --light-background: #272727;
     --dark-background: #FAFAFA;
   }
+
+  :global body.invert {
+    --dark-background: #272727;
+    --light-background: #FAFAFA;
+  }
 }
 
 section {
@@ -56,6 +61,7 @@ section::after {
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   transition: 400ms background var(--cubic);
 }
 
