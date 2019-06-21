@@ -1,7 +1,7 @@
 import {
   installRouter,
-  installOfflineWatcher,
-  installMediaQueryWatcher
+  // installOfflineWatcher,
+  // installMediaQueryWatcher
 } from 'pwa-helpers';
 import {
   viewChange
@@ -18,15 +18,8 @@ import './pages/footer';
   }
   
   installRouter((location) => viewChange(location));
-  // todo cache everything for offline viewing
-  // todo handle this in collaboration with service worker
-  installOfflineWatcher((offline) => console.log(offline));
-  installMediaQueryWatcher(`(min-width: 600px)`, (matches) => {
-    console.log(matches ? 'wide screen' : 'narrow sreen');
-  });
   
   document.querySelector('.logo').addEventListener('click', () => {
-    // store this in localstorage
     document.body.classList.toggle('invert');
-  })
+  });
 })();
