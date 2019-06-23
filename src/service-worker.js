@@ -1,4 +1,5 @@
-var CACHE_NAME = 'v1';
+const CACHE_NAME = 'v1';
+const version = '1.0.0';
 
 self.addEventListener('install', function (event) {
   console.log('installing service worker');
@@ -41,7 +42,7 @@ async function cacheCheck(request) {
       return response;
     }
   ).catch(function (error) {
-    console.log('fetch error ', error, request.url);
+    console.log('fetch error ', request.url);
   });
 }
 
