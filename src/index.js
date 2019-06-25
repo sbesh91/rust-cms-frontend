@@ -23,7 +23,7 @@ import {
   const nav = import('./pages/nav');
   const footer = import('./pages/footer');
   const page = import('./pages/home/index');
-  Promise.all([header, nav, footer, page]);
+  await Promise.all([header, nav, footer, page]);
   
   if (!document.body.animate) {
     await import('web-animations-js');

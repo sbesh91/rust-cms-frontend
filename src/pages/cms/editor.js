@@ -3,6 +3,7 @@ import {
   html,
   css
 } from 'lit-element';
+import './preview';
 import {
   adminStyles
 } from '../../tools/styles';
@@ -18,6 +19,8 @@ import {
   article,
   listing
 } from './templates';
+import { fromEvent } from 'rxjs/_esm2015';
+import { debounceTime } from 'rxjs/_esm2015/operators';
 
 class EditorPage extends LitElement {
 
@@ -35,11 +38,13 @@ class EditorPage extends LitElement {
     document.addEventListener("keydown", event => {
       if(event.ctrlKey && event.key === 's' && this.section.id) {
         event.preventDefault();
-        const button = this.shadowRoot.querySelector('form button');
-        button.click();
+        
+        this.triggerSubmit();
       }
     });
   }
+
+
 
   updated() {
     this.editor.setValue(this.section.module);
@@ -54,6 +59,13 @@ class EditorPage extends LitElement {
       lineNumbers: true,
       tabSize: 4,
       showCursorWhenSelecting: true
+    });
+    const preview = this.shadowRoot.querySelector('preview-page');
+    
+    const watch = fromEvent(this.editor, 'change');
+    watch.pipe(debounceTime(1000)).subscribe(data => {
+      preview.preview = this.editor.getValue();
+      this.triggerSubmit();
     });
   }
 
@@ -91,14 +103,22 @@ class EditorPage extends LitElement {
         }
 
         .codeEditor {
-          grid-column: 1 / span 2;
+          grid-column: 1;
+        }
+
+        .preview {
+          grid-column: 2;
+          height: calc(100vh - 9rem);
+          overflow-y: scroll;
         }
 
         .submit {
-          grid-column: 2;
+          grid-column: 1;
           position: sticky;
           bottom: -1rem;
           z-index: 2;
+          pointer-events: none;
+          visibility: hidden;
         }
       `
     ]
@@ -116,6 +136,11 @@ class EditorPage extends LitElement {
 
   close() {
     document.dispatchEvent(new Event('close-section'))
+  }
+
+  triggerSubmit() {
+    const button = this.shadowRoot.querySelector('form button');
+    button.click();
   }
 
   submit(e) {
@@ -140,7 +165,7 @@ class EditorPage extends LitElement {
         data: data,
         method: method
       }).then(res => res.json())
-      .then(response => this.close())
+      .then(response => console.log('save'))
       .catch(error => console.error('Error:', error));
   }
 
@@ -167,6 +192,9 @@ class EditorPage extends LitElement {
         <input value=${this.section.href} type="text" name="href" placeholder="href" required />
         <div class="codeEditor">
 					<textarea name="module"></textarea>
+        </div>
+        <div class="preview">
+          <preview-page></preview-page>
         </div>
         <button class="submit" type="submit">Submit</button>
       </form>

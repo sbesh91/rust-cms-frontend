@@ -2,7 +2,7 @@ import {
   css
 } from 'lit-element';
 
-const defaultStyles = css`
+const defaultStyles = css `
   * { 
     box-sizing: border-box;  
     font-family: 'Exo', sans-serif;
@@ -43,6 +43,23 @@ const defaultStyles = css`
     padding: .5rem 0;
   }
 
+  pre {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    overflow-y: hidden;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    background: var(--light-background);
+    box-shadow: 0 0 1rem 0 var(--dark-background);
+  }
+  pre code {
+    display: block;
+    padding: 1rem;
+    color: var(--dark-background);
+  }
+
   svg polyline {
     fill: var(--dark-background);
   }
@@ -73,7 +90,7 @@ const defaultStyles = css`
 `;
 
 
-const adminStyles = [ 
+const adminStyles = [
   defaultStyles,
   css `
     header {
