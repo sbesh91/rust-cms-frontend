@@ -14,22 +14,18 @@ class ArticlePage extends LitElement {
 
       this.meta = this.shadowRoot.querySelectorAll('meta');
       const script = this.shadowRoot.querySelector('script');
-
-      this.script = document.createElement("script");
-      this.script.append(script.textContent); 
-      this.shadowRoot.appendChild(this.script);
-
+      
       this.meta.forEach(tag => {
         document.head.appendChild(tag);
       });
+
+      eval(script.textContent);
     });
 
     document.addEventListener('unload-article', () => {
       this.article = { module: "" };
       
       this.performUpdate();
-
-      this.script.remove();
 
       this.meta.forEach(tag => {
         document.head.removeChild(tag);
