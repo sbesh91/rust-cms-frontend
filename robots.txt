@@ -1,0 +1,2 @@
+User-agent: Googlebot
+User-agent: Twitterbot
