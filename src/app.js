@@ -32,10 +32,8 @@ const getArticle = async (page) => {
 const load = async (route) => {
   switch (route) {
     case '/':
-      // await import('./pages/home/index');
       document.dispatchEvent(new Event('load-listings'));
     case 'about':
-      // await import('./pages/home/index');
       break;
     case 'login':
     case 'admin':

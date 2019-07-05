@@ -43,8 +43,22 @@ const defaultStyles = css `
     padding: .5rem 0;
   }
 
+  .pad-sides {
+    width: calc(100% - 2rem);
+  	margin: 0 auto;
+  }
+
+  .paragraph {
+    line-height: 1.5rem;
+  }
+
+  ul {
+    line-height: 1.75rem;
+  }
+
   pre {
     width: 100%;
+    max-width: calc(100vw - 4rem);
     padding: 0;
     margin: 0;
     overflow: auto;
