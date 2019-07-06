@@ -49,6 +49,22 @@ class EditorPage extends LitElement {
   updated() {
     this.editor.setValue(this.section.module);
     this.editor.refresh();
+
+    const preview = this.shadowRoot.querySelector('preview-page');
+
+    const watch = fromEvent(this.editor, 'change');
+    
+    if (this.subscription) this.subscription.unsubscribe();
+
+    this.subscription = watch        
+      .pipe(debounceTime(1000))
+      .subscribe(data => {
+        preview.preview = this.editor.getValue();
+
+        if (this.section.id) {
+          this.triggerSubmit();
+        }
+      });
   }
 
   firstUpdated() {
@@ -59,13 +75,6 @@ class EditorPage extends LitElement {
       lineNumbers: true,
       tabSize: 4,
       showCursorWhenSelecting: true
-    });
-    const preview = this.shadowRoot.querySelector('preview-page');
-    
-    const watch = fromEvent(this.editor, 'change');
-    watch.pipe(debounceTime(1000)).subscribe(data => {
-      preview.preview = this.editor.getValue();
-      this.triggerSubmit();
     });
   }
 
@@ -96,6 +105,11 @@ class EditorPage extends LitElement {
           visibility: visible;
         }
 
+        .delete {
+          margin-right: auto;
+          margin-left: 1rem;
+        }
+
         form {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -117,8 +131,6 @@ class EditorPage extends LitElement {
           position: sticky;
           bottom: -1rem;
           z-index: 2;
-          pointer-events: none;
-          visibility: hidden;
         }
       `
     ]
@@ -135,12 +147,26 @@ class EditorPage extends LitElement {
   }
 
   close() {
-    document.dispatchEvent(new Event('close-section'))
+    this.subscription.unsubscribe();
+    
+    document.dispatchEvent(new Event('close-section'));
   }
 
   triggerSubmit() {
     const button = this.shadowRoot.querySelector('form button');
     button.click();
+  }
+
+  delete() {
+    const result = window.confirm('Are you sure you would like to delete this?');
+    if (result) {
+      http.fetch({
+        url: `sections/${this.section.id}`,
+        method: 'DELETE'
+      }).then(res => res.text())
+        .then(response => this.close())
+        .catch(error => console.error('Error:', error));
+    }
   }
 
   submit(e) {
@@ -165,7 +191,12 @@ class EditorPage extends LitElement {
         data: data,
         method: method
       }).then(res => res.json())
-      .then(response => console.log('save'))
+      .then(response => {
+        if (method === 'POST') {
+          this.section = response;
+          this.performUpdate();
+        }
+      })
       .catch(error => console.error('Error:', error));
   }
 
@@ -181,6 +212,7 @@ class EditorPage extends LitElement {
     return html `
       <header>
         <button class="small back" @click=${(e) => this.close()}>Back</button>
+        <button class="small delete" @click=${(e) => this.delete()}>Delete</button>
         Section
       </header>
       <form @submit=${(e) => this.submit(e)}>
