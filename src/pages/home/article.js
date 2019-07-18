@@ -19,7 +19,9 @@ class ArticlePage extends LitElement {
         document.head.appendChild(tag);
       });
 
-      eval(script.textContent);
+      if (script) {
+        eval(script.textContent);
+      }
     });
 
     document.addEventListener('unload-article', () => {

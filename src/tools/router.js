@@ -164,6 +164,8 @@ const manageDomViewChange = async (first = false, method = 'add', direction = 'f
 
 const viewChange = async (location) => {
   if (currentLocation === "unset") {
+    Array.from(document.querySelectorAll('.active')).forEach(i => i.classList.remove('active'));
+
     await navigate(window.decodeURIComponent(location.pathname));
     
     await manageDomViewChange(true);
