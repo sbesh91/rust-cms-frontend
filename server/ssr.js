@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 // In-memory cache of rendered pages. Note: this will be cleared whenever the
 // server process stops. If you need true persistence, use something like
 // Google Cloud Storage (https://firebase.google.com/docs/storage/web/start).
+// eslint-disable-next-line no-undef
 const RENDER_CACHE = new Map();
 
 async function ssr(url) {
@@ -13,7 +14,7 @@ async function ssr(url) {
 
   const start = Date.now();
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
   try {
     // networkidle0 waits for the network to be idle (no requests for 500ms).
