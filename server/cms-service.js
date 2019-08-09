@@ -26,7 +26,7 @@ function injectMetaTags(metaList, html) {
 
   Array.from(document.querySelectorAll('script'))
     .filter(i => i.src.includes('cms_frontend'))
-    .forEach(i => document.head.removeChild(i));
+    .forEach(i => i.src = i.src.replace('http://cms_frontend:8080', 'https://sbesh.com'));
 
   metaList.forEach(i => document.head.appendChild(i));
 

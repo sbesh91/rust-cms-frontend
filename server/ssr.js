@@ -16,12 +16,12 @@ async function ssr(url) {
 
   const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
+
   try {
     // networkidle0 waits for the network to be idle (no requests for 500ms).
     // The page's JS has likely produced markup by this point, but wait longer
     // if your site lazy loads, etc.
     await page.goto(url, {waitUntil: 'networkidle0'});
-    await page.waitForSelector('app-header');
   } catch (err) {
     console.error(err);
     throw new Error('page.goto/waitForSelector timed out.');
