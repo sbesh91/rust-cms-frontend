@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 else {
   app.use('/articles/*', async (req, res) => {
     const url = `${req.protocol}://${req.get('host')}`;
-    console.log(url);
+    
     const { html, ttRenderMs } = await ssr(url);
     
     const start = Date.now();

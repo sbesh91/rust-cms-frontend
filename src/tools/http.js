@@ -1,5 +1,5 @@
 import { getToken, $auth } from './auth';
-import { baseUrl } from '../app';
+import { baseUrl } from './../app';
 
 const headers = {
   'Content-Type': 'application/json',
