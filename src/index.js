@@ -10,8 +10,8 @@ import {
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (refreshing) return;
+
         refreshing = true;
-        console.log('reloading');
         window.location.reload();
       }
     );
