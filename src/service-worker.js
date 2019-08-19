@@ -1,5 +1,5 @@
 const CACHE_NAME = 'v1';
-const version = '1.0.0';
+const version = '1.0.1';
 
 self.addEventListener('install', function (event) {
   console.log('installing service worker');
