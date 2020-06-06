@@ -81,9 +81,8 @@ class AboutPage extends LitElement {
       <div class="spacer"></div>
 
       <p>
-        I work with a health care IT company (ImageMoverMD) and we do some pretty cool things.
-        We specialize in automating and solving obscure imaging problems in medicine.
-        Our software can handle workflows ranging from smart phone image capture to CD uploading (and a few other things I can't tell you about yet 😉)
+        I work with a project planning IT company (<a href="https://www.liquidplanner.com/" target="_blank">Liquid Planner</a>) and we do some pretty cool things.
+        We specialize in automating project planning to help your team answer the question "When?"
       </p>      
 
       <div class="spacer"></div>
@@ -118,7 +117,7 @@ class AboutPage extends LitElement {
     return html`
       <div>
         <h1>Hi, I'm Steven</h1>
-        <h3>I'm a software engineer at this rad <a href="https://imagemovermd.com" target="_blank">startup</a></h3>
+        <h3>I'm a software engineer at this rad <a href="https://www.liquidplanner.com/" target="_blank">startup</a></h3>
         
         ${this.expanded && this.body()}
       </div>
