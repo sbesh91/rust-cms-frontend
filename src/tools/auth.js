@@ -10,17 +10,17 @@ function getToken() {
   const token = localStorage.getItem(JWT_KEY);
   
   return token || UNAUTHENTICATED;
-};
+}
 
 function setToken(token) {
   localStorage.setItem(JWT_KEY, token);
 
   _auth.next(token);
-};
+}
 
 function isAuthenticated(token) {
   return token !== UNAUTHENTICATED;
-};
+}
 
 export {
   getToken,

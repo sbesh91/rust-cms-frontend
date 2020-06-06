@@ -44,8 +44,6 @@ class EditorPage extends LitElement {
     });
   }
 
-
-
   updated() {
     this.editor.setValue(this.section.module);
     this.editor.refresh();
@@ -148,7 +146,6 @@ class EditorPage extends LitElement {
 
   close() {
     this.subscription.unsubscribe();
-    
     document.dispatchEvent(new Event('close-section'));
   }
 
@@ -193,8 +190,7 @@ class EditorPage extends LitElement {
       }).then(res => res.json())
       .then(response => {
         if (method === 'POST') {
-          this.section = response;
-          this.performUpdate();
+          this.close();
         }
       })
       .catch(error => console.error('Error:', error));
@@ -208,7 +204,7 @@ class EditorPage extends LitElement {
         section_type: ''
       }
     }
-
+    
     return html `
       <header>
         <button class="small back" @click=${(e) => this.close()}>Back</button>
@@ -221,7 +217,7 @@ class EditorPage extends LitElement {
           <option value="article">Article</option>
           <option value="listing">Listing</option>
         </select>
-        <input value=${this.section.href} type="text" name="href" placeholder="href" required />
+        <input .value=${this.section.href} type="text" name="href" placeholder="href" required />
         <div class="codeEditor">
 					<textarea name="module"></textarea>
         </div>

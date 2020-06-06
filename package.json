@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run clean && parcel src/index.html --port 8081",
     "build": "npm run clean && parcel build src/index.html --detailed-report",
-    "proxy": "nodemon proxy.js",
+    "proxy": "NODE_ENV=development nodemon ./server/proxy.js",
+    "proxy:prod": "NODE_ENV=production node ./server/proxy.js",
     "clean": "rm -rf dist && rm -rf .cache"
   },
   "repository": {
@@ -25,8 +26,8 @@
     "jshint": "^2.10.2",
     "lit-element": "^2.1.0",
     "lit-html": "^1.1.0",
-    "node-fetch": "^2.6.0",
-    "puppeteer": "1.18.1",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
     "pwa-helpers": "^0.9.1",
     "rxjs": "^6.5.2",
     "tools": "git+https://git@github.com/sbesh91/tools.git",
@@ -37,10 +38,12 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "express": "^4.17.1",
-    "http-proxy-middleware": "^0.19.1",
+    "eslint": "6.0.1",
+    "eslint-plugin-import": "^2.18.2",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
+    "node-fetch": "^2.6.0",
+    "puppeteer": "1.18.1",
     "parcel-bundler": "^1.12.3",
     "postcss-modules": "^1.4.1"
   }

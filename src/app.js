@@ -26,7 +26,6 @@ const getArticle = async (page) => {
 
   const article = response[0];
   document.dispatchEvent(new CustomEvent('load-article', { detail: article }));
-  return article;
 }
 
 const load = async (route) => {
