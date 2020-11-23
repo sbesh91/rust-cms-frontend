@@ -3,6 +3,13 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { defaultStyles } from '../../tools/styles';
 
 class ArticlePage extends LitElement {
+
+  static get properties() {
+    return {
+      article: {type: Object},
+      meta: {type: Object}
+    };
+  }
   
   constructor() {
     super();

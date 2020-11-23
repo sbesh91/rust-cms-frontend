@@ -2,17 +2,18 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
   --dark-background: #272727;
-  --light-background: #FAFAFA;
-  --grey-background: rgba(0, 0, 0, .7);
-  --grey: rgba(0,0,0,.08);
+  --light-background: #fafafa;
+  --grey-background: rgba(0, 0, 0, 0.7);
+  --grey: rgba(0, 0, 0, 0.08);
   --logo-translate: -1rem;
-  --cubic: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --cubic: cubic-bezier(0.4, 0, 0.2, 1);
 
   margin: 0;
   font-size: 16px;
@@ -24,18 +25,18 @@ body {
 
 :global body.invert {
   --light-background: #272727;
-  --dark-background: #FAFAFA;
+  --dark-background: #fafafa;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
     --light-background: #272727;
-    --dark-background: #FAFAFA;
+    --dark-background: #fafafa;
   }
 
   :global body.invert {
     --dark-background: #272727;
-    --light-background: #FAFAFA;
+    --light-background: #fafafa;
   }
 }
 
@@ -49,7 +50,7 @@ section {
 }
 
 section::after {
-  content: '';
+  content: "";
   height: 2rem;
   width: 100%;
   display: block;
@@ -87,12 +88,14 @@ section::after {
   opacity: 0;
 }
 
-:global #top rect, :global #top path {
+:global #top rect,
+:global #top path {
   fill: var(--light-background);
   stroke: var(--grey);
 }
 
-:global #bottom rect, :global #bottom path {
+:global #bottom rect,
+:global #bottom path {
   fill: var(--dark-background);
   stroke: var(--grey);
 }
@@ -121,7 +124,6 @@ main > * {
   visibility: hidden;
 }
 
-
 main :global .active {
   position: relative !important;
   max-height: none !important;
@@ -129,7 +131,6 @@ main :global .active {
   pointer-events: auto !important;
   visibility: visible !important;
   z-index: 1;
-  /* opacity: 1 !important; */
 }
 
 :global .logo {
@@ -137,11 +138,13 @@ main :global .active {
   height: 100%;
   transition: 400ms transform var(--cubic);
   transform-origin: center;
-  transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(-20deg) rotateZ(-35deg) skewX(-20deg) translateY(var(--logo-translate));
+  transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(-20deg) rotateZ(-35deg)
+    skewX(-20deg) translateY(var(--logo-translate));
 }
 
 :global .invert .logo {
-  transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(20deg) rotateZ(-15deg) skewX(-20deg) translateY(var(--logo-translate));
+  transform: scale(2.2, 2.2) rotateX(-45deg) rotateY(20deg) rotateZ(-15deg)
+    skewX(-20deg) translateY(var(--logo-translate));
 }
 
 :global .logo svg {

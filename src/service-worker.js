@@ -1,7 +1,8 @@
 const CACHE_NAME = 'v1';
+// eslint-disable-next-line no-unused-vars
 const version = '1.0.1';
 
-self.addEventListener('install', function (event) {
+self.addEventListener('install', function () {
   console.log('installing service worker');
   self.skipWaiting();
 });
@@ -41,7 +42,7 @@ async function cacheCheck(request) {
 
       return response;
     }
-  ).catch(function (error) {
+  ).catch(function () {
     console.log('fetch error ', request.url);
   });
 }

@@ -24,6 +24,17 @@ import { $section } from './observers';
 
 class AdminPage extends LitElement {
 
+  static get properties() {
+    return { 
+      filterHref: {type: String}, 
+      filterSectionType: {type: String},
+      listPage: {type: Object},
+      editorPage: {type: Object},
+      list: {type: Array},
+      section: {type: Object}
+    };
+  }
+
   constructor() {
     super();
 

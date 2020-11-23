@@ -8,7 +8,8 @@ class HomePage extends LitElement {
     return {
       loaded: {
         type: Boolean,
-      }
+      },
+      listings: {type: Array}
     };
   }
 

@@ -18,12 +18,10 @@ class ListPage extends LitElement {
   }
 
   edit(e, item) {
-    e.preventDefault();
     $section.next(item);
   }
 
   add(e) {
-    e.preventDefault();
     document.dispatchEvent(new Event('add-section'))
   }
 
