@@ -1,7 +1,5 @@
-import { Subject } from 'rxjs/_esm2015';
+import { Subject } from "rxjs";
 
 const $section = new Subject();
 
-export {
-  $section
-}
+export { $section };
