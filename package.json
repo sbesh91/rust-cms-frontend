@@ -2,7 +2,6 @@
   "name": "rust-cms-frontend",
   "version": "0.1.0",
   "description": "",
-  "type": "module",
   "scripts": {
     "start": "npm run clean && parcel src/index.html --port 8081",
     "build": "npm run clean && parcel build src/index.html --detailed-report",
