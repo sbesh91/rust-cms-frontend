@@ -1,8 +1,7 @@
-import { LitElement, html, css } from 'lit-element';
-import { defaultStyles } from '../tools/styles';
+import { LitElement, html, css } from "lit-element";
+import { defaultStyles } from "../tools/styles";
 
 class AppFooter extends LitElement {
-  
   constructor() {
     super();
   }
@@ -15,17 +14,20 @@ class AppFooter extends LitElement {
           font-size: 1.5rem;
           text-align: center;
         }
-      `
-    ]
+      `,
+    ];
   }
 
   render() {
     return html`
       <footer>
-        Site made with ❤️ by <a href="https://twitter.com/sbesh91" target="_blank">me</a>.
+        Site made with ❤️ by
+        <a href="https://bsky.app/profile/sbesh.bsky.social" target="_blank"
+          >me</a
+        >.
       </footer>
     `;
   }
 }
 
-customElements.define('app-footer', AppFooter);
+customElements.define("app-footer", AppFooter);
