@@ -1,13 +1,12 @@
-import { LitElement, html, css } from 'lit-element';
-import { defaultStyles } from '../../tools/styles';
+import { LitElement, html, css } from "lit-element";
+import { defaultStyles } from "../../tools/styles";
 
 class AboutPage extends LitElement {
-
   static get properties() {
     return {
       expanded: {
         type: Boolean,
-      }
+      },
     };
   }
 
@@ -39,13 +38,12 @@ class AboutPage extends LitElement {
         }
 
         .contact h3 {
-          
         }
 
         .separator {
           width: 60%;
           max-width: 400px;
-          margin: .5rem 0 2rem 0;
+          margin: 0.5rem 0 2rem 0;
           border-bottom: 1px solid var(--dark-background);
         }
 
@@ -54,8 +52,8 @@ class AboutPage extends LitElement {
           grid: auto-flow dense / repeat(3, 4rem);
           grid-gap: 1rem;
         }
-      `
-    ]
+      `,
+    ];
   }
 
   body() {
@@ -63,37 +61,40 @@ class AboutPage extends LitElement {
       <div class="spacer"></div>
       <div class="spacer"></div>
 
+      <p>I've been a software engineer for a while now (2012 ish)</p>
+
+      <div class="spacer"></div>
+
+      <p>My career had humble beginnings with C# ASP.NET MVC</p>
+
       <p>
-        I've been a software engineer for a while now (2012 ish)
+        It's been a wild ride through different technologies and different
+        ideologies. I currently work with docker, javascript, and loads of other
+        fun things.
       </p>
 
       <div class="spacer"></div>
 
       <p>
-        My career had humble beginnings with C# ASP.NET MVC
-      </p>
-
-      <p>
-        It's been a wild ride through different technologies and different ideologies.  
-        I currently work with docker, javascript, and loads of other fun things.
+        I work at <a href="https://www.twilio.com/" target="_blank">Twilio</a>,
+        a leading cloud communications platform. We build APIs that power voice,
+        messaging, video, and authentication for millions of applications
+        worldwide, helping developers create engaging customer experiences.
       </p>
 
       <div class="spacer"></div>
 
       <p>
-        I work with a project planning IT company (<a href="https://www.liquidplanner.com/" target="_blank">Liquid Planner</a>) and we do some pretty cool things.
-        We specialize in automating project planning to help your team answer the question "When?"
-      </p>      
-
-      <div class="spacer"></div>
-
-      <p>
-        In my free time I do all sorts of things.  I always enjoy a new puzzle to solve or a new thought experiment to consider,
-        but theres more!  Tennis and Skateboarding seem to be written into my fabric.  
-        I just can't get away from them no matter how long I go between sessions.
-        I make time to help people (always an open offer to chat).
+        In my free time I do all sorts of things. I always enjoy a new puzzle to
+        solve or a new thought experiment to consider, but theres more! Tennis
+        and Skateboarding seem to be written into my fabric. I just can't get
+        away from them no matter how long I go between sessions. I make time to
+        help people (always an open offer to chat).
         <span class="cursive spacer">P.S.</span>
-        I have an adorable pupper and you should follow his instagram <a href="https://www.instagram.com/linusthepupper" target="_blank">linus the pupper</a>
+        I have an adorable pupper and you should follow his instagram
+        <a href="https://www.instagram.com/linusthepupper" target="_blank"
+          >linus the pupper</a
+        >
       </p>
 
       <div class="spacer"></div>
@@ -105,9 +106,15 @@ class AboutPage extends LitElement {
         <div class="separator"></div>
 
         <div class="links">
-          <a href="https://twitter.com/sbesh91" target="_blank">Twitter</a>
+          <a href="https://bsky.app/profile/sbesh.bsky.social" target="_blank"
+            >Bluesky</a
+          >
           <a href="https://www.github.com/sbesh91" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/steven-beshensky-b211127a/" target="_blank">Linkedin</a>
+          <a
+            href="https://www.linkedin.com/in/steven-beshensky-b211127a/"
+            target="_blank"
+            >Linkedin</a
+          >
         </div>
       </div>
     `;
@@ -117,12 +124,15 @@ class AboutPage extends LitElement {
     return html`
       <div>
         <h1>Hi, I'm Steven</h1>
-        <h3>I'm a software engineer at this rad <a href="https://www.liquidplanner.com/" target="_blank">startup</a></h3>
-        
+        <h3>
+          I'm a Staff Software Engineer at
+          <a href="https://www.twilio.com/" target="_blank">Twilio</a>
+        </h3>
+
         ${this.expanded && this.body()}
       </div>
     `;
   }
 }
 
-customElements.define('about-page', AboutPage);
+customElements.define("about-page", AboutPage);
